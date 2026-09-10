@@ -1,0 +1,14 @@
+[
+  {
+    "vector_ref": 0,
+    "doc_id": "doc_shared_id",
+    "document_id": "doc_shared_id",
+    "filename": "secret_B.pdf",
+    "user_id": "user_iso_B",
+    "page": 1,
+    "chunk_id": 1,
+    "text": "User B secret security key is BetaKey88.",
+    "start_char": 0,
+    "end_char": 40
+  }
+]

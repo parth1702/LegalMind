@@ -1,0 +1,8 @@
+{
+  "doc_id": "doc_empty",
+  "user_id": "user_test",
+  "status": "FAILED",
+  "total_chunks": 0,
+  "error_message": "Could not extract readable text content from document.",
+  "updated_at": "2026-08-17T07:46:46.304490"
+}

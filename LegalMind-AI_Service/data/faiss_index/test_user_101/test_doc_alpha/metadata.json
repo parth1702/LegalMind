@@ -1,0 +1,14 @@
+[
+  {
+    "vector_ref": 0,
+    "doc_id": "test_doc_alpha",
+    "document_id": "test_doc_alpha",
+    "filename": "document.pdf",
+    "user_id": "test_user_101",
+    "page": 1,
+    "chunk_id": 1,
+    "text": "SECTION 1. CONFIDENTIALITY AND NON-DISCLOSURE. Both parties covenant that all technical information and proprietary trade secrets shared hereunder shall be kept strictly confidential. SECTION 2. LIMITATION OF LIABILITY. Neither party shall be liable for indirect, incidental, or consequential damages. Total aggregate liability is capped at $50,000 USD. SECTION 3. TERMINATION. Either party may terminate this agreement upon 30 days prior written notice.",
+    "start_char": 0,
+    "end_char": 456
+  }
+]

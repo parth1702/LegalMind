@@ -1,0 +1,14 @@
+[
+  {
+    "vector_ref": 0,
+    "doc_id": "doc_fallback_test",
+    "document_id": "doc_fallback_test",
+    "filename": "document.pdf",
+    "user_id": "user_fallback_test",
+    "page": 1,
+    "chunk_id": 1,
+    "text": "Sample fallback text without page array.",
+    "start_char": 0,
+    "end_char": 40
+  }
+]

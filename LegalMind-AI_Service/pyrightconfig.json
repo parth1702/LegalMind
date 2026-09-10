@@ -1,0 +1,18 @@
+{
+    "pythonVersion": "3.10",
+    "pythonPlatform": "Windows",
+    "pythonInterpreter": "C:\\Users\\Hp\\AppData\\Local\\Programs\\Python\\Python310\\python.exe",
+    "typeCheckingMode": "basic",
+    "reportMissingModuleSource": "none",
+    "reportMissingImports": "none",
+    "reportUnknownMemberType": "none",
+    "reportUnknownVariableType": "none",
+    "reportUnknownArgumentType": "none",
+    "include": [
+        "app",
+        "tests"
+    ],
+    "exclude": [
+        "**/__pycache__"
+    ]
+}

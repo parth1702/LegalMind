@@ -1,0 +1,14 @@
+[
+  {
+    "vector_ref": 0,
+    "doc_id": "doc_fullstack_B",
+    "document_id": "doc_fullstack_B",
+    "filename": "vendor_consulting.pdf",
+    "user_id": "user_fullstack_A",
+    "page": 1,
+    "chunk_id": 1,
+    "text": "VENDOR CONSULTING AGREEMENT 2026 This Agreement is between Beta Corp ('Client') and DevServices Ltd ('Vendor'). 1. LIABILITY CAP. Total aggregate liability under this agreement shall be capped at $50,000 USD. 2. TERMINATION PERIOD. Either party may terminate this agreement upon 14 days prior written notice.",
+    "start_char": 0,
+    "end_char": 310
+  }
+]

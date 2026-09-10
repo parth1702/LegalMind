@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <symbol id="legalmind-mark" viewBox="0 0 64 64">
+    <rect width="64" height="64" rx="16" fill="#050816"/>
+    <path d="M18 22h28l-4 8h-20l-4-8Zm4 12h20l-3 6H25l-3-6Zm4 10h12l-2 4h-8l-2-4Z" fill="#22d3ee"/>
+  </symbol>
+</svg>

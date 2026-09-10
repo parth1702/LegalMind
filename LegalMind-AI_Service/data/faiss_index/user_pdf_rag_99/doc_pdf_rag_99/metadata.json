@@ -1,0 +1,14 @@
+[
+  {
+    "vector_ref": 0,
+    "doc_id": "doc_pdf_rag_99",
+    "document_id": "doc_pdf_rag_99",
+    "filename": "software_license_agreement.pdf",
+    "user_id": "user_pdf_rag_99",
+    "page": 1,
+    "chunk_id": 1,
+    "text": "SOFTWARE LICENSE AGREEMENT 2026 This Agreement is made by and between TechGiant Inc. ('Licensor') and Enterprise Solutions Ltd. ('Licensee'). 1. SOFTWARE GRANT. Licensor grants Licensee a non-exclusive license to use the Software. 2. ANNUAL SUBSCRIPTION FEE. Licensee shall pay an annual subscription fee of $250,000 USD. 3. ARBITRATION VENUE. Any disputes shall be resolved by binding arbitration seated in London, United Kingdom.",
+    "start_char": 0,
+    "end_char": 431
+  }
+]

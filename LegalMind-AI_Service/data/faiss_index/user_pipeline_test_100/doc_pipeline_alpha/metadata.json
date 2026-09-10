@@ -1,0 +1,14 @@
+[
+  {
+    "vector_ref": 0,
+    "doc_id": "doc_pipeline_alpha",
+    "document_id": "doc_pipeline_alpha",
+    "filename": "commercial_agreement.pdf",
+    "user_id": "user_pipeline_test_100",
+    "page": 1,
+    "chunk_id": 1,
+    "text": "THIS DISTRIBUTOR AGREEMENT is made this 10th day of March, 2026, by and between TechCorp Inc. (\"Company\") and Global Distribution LLC (\"Distributor\"). 1. GRANT & EXCLUSIVITY. Company hereby appoints Distributor as exclusive distributor for the territory of North America. 2. CONFIDENTIALITY. Both parties shall maintain strict confidentiality over proprietary technical documentation for 5 years. 3. UNCAPPED LIABILITY & INDEMNIFICATION. Distributor agrees to indemnify Company against third-party claims. Party liability under this agreement shall be uncapped. 4. TERMINATION. Company reserves the right to terminate this contract immediately for convenience without cause. 5. GOVERNING LAW. This Agreement is governed by the laws of the State of Delaware.",
+    "start_char": 0,
+    "end_char": 762
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "vector_ref": 0,
+    "doc_id": "doc_iso_A",
+    "document_id": "doc_iso_A",
+    "filename": "doc_A.pdf",
+    "user_id": "real_rag_user_100",
+    "page": 1,
+    "chunk_id": 1,
+    "text": "Contract Alpha annual license fee is $50,000 USD payable quarterly.",
+    "start_char": 0,
+    "end_char": 67
+  }
+]

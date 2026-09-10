@@ -1,0 +1,14 @@
+[
+  {
+    "vector_ref": 0,
+    "doc_id": "doc_fullstack_A",
+    "document_id": "doc_fullstack_A",
+    "filename": "cloud_agreement.pdf",
+    "user_id": "user_fullstack_A",
+    "page": 1,
+    "chunk_id": 1,
+    "text": "ENTERPRISE CLOUD SERVICES AGREEMENT 2026 This Agreement is between Acme Corp ('Client') and CloudTech Inc ('Vendor'). 1. LIABILITY CAP. Total aggregate liability under this agreement shall be capped at $1,000,000 USD. 2. TERMINATION PERIOD. Either party may terminate this agreement upon 60 days prior written notice. 3. GOVERNING LAW. This Agreement shall be governed by the laws of California.",
+    "start_char": 0,
+    "end_char": 398
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "vector_ref": 0,
+    "doc_id": "doc_B",
+    "document_id": "doc_B",
+    "filename": "document.pdf",
+    "user_id": "user_B",
+    "page": 1,
+    "chunk_id": 1,
+    "text": "Payment of $100,000 USD is due on the 1st of every month.",
+    "start_char": 0,
+    "end_char": 57
+  }
+]

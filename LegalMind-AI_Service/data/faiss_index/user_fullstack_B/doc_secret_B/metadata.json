@@ -1,0 +1,14 @@
+[
+  {
+    "vector_ref": 0,
+    "doc_id": "doc_secret_B",
+    "document_id": "doc_secret_B",
+    "filename": "secret_user_B.pdf",
+    "user_id": "user_fullstack_B",
+    "page": 1,
+    "chunk_id": 1,
+    "text": "User B secret security token is SecretTokenB_999.",
+    "start_char": 0,
+    "end_char": 49
+  }
+]

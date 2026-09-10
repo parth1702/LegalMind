@@ -1,0 +1,14 @@
+[
+  {
+    "vector_ref": 0,
+    "doc_id": "doc_real_upload_999",
+    "document_id": "doc_real_upload_999",
+    "filename": "real_uploaded_contract.pdf",
+    "user_id": "real_test_user_777",
+    "page": 1,
+    "chunk_id": 1,
+    "text": "CONFIDENTIAL MASTER SERVICES AGREEMENT 2026 This Agreement is entered into by Alpha Enterprise Inc. ('Client') and Beta Global Solutions LLC ('Vendor'). 1. SERVICES & FEES. Vendor shall perform IT consulting services for a total fee of $150,000 USD. 2. LIMITATION OF LIABILITY. Total aggregate liability under this agreement shall be capped at $50,000 USD. 3. GOVERNING LAW. This Agreement shall be governed by the laws of New York State.",
+    "start_char": 0,
+    "end_char": 438
+  }
+]

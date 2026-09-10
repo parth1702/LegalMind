@@ -1,0 +1,14 @@
+[
+  {
+    "vector_ref": 0,
+    "doc_id": "doc_iso_B",
+    "document_id": "doc_iso_B",
+    "filename": "doc_B.pdf",
+    "user_id": "real_rag_user_100",
+    "page": 1,
+    "chunk_id": 1,
+    "text": "Contract Beta annual license fee is $950,000 USD payable upfront.",
+    "start_char": 0,
+    "end_char": 65
+  }
+]

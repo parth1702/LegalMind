@@ -1,0 +1,26 @@
+[
+  {
+    "vector_ref": 0,
+    "doc_id": "6a82c1aac19ff6938819450a",
+    "document_id": "6a82c1aac19ff6938819450a",
+    "filename": "resume_nainil_patel.pdf",
+    "user_id": "6a798c8dc66d9f63f83b4604",
+    "page": 1,
+    "chunk_id": 1,
+    "text": "NAINIL PATEL Q A & S O F T W A R E T E S T I N G I N T E R N Valsad, Gujarat• nainil9845patel@gmail.com• +91 9313499676• GitHub: nainilpatel102 C A R E E R O B J E C T I V E Motivated Computer Engineering student with hands-on experience building full-stack web applications, seeking a QA / Software Testing Internship to apply my understanding of the software development lifecycle to identify defects, write test cases, and ensure product quality. Currently upskilling in manual testing, API testing, and test automation basics. A developer background helps me understand how bugs are introduced — making me a more effective tester. T E C H N I C A L S K I L L S Testing (Active Learning):Manual Testing, Test Case Writing, Bug Reporting, STLC Frontend: HTML, CSS, JavaScript, React, Tailwind CSS Testing Tools (Learning):Selenium (basics), Postman, Browser DevTools Backend: Node.js, Express.js, Flask (Python), PHP Bug Tracking: GitHub Issues, Jira (basics) Database: MySQL, Oracle Programming: C, C++, Java, Python ML / AI Tools: PyTorch TabNet, Scikit-learn, Tesseract OCR Version Control: Git, GitHub P R O J E C T S Blood Sight – AI-Powered Blood Report Analyzer 5th Semester | Team Project | PRJCE036 – C.S.P.I.T, Charusat University React · Tailwind CSS · Lucide React · Flask (Python) · MySQL · PyTorch TabNet · Scikit-learn · Tesseract OCR Built an intuitive platform for patients to upload blood reports (PDF, JPG, PNG) and extract blood parameters using Tesseract OCR — no medical expertise required. Implemented AI-powered disease prediction (ML) for conditions including diabetes, anaemia, leukaemia, and thalassemia using PyTorch TabNet and Scikit-learn. Generated detailed, downloadable reports with graphs, insights, and explanations for both patients and doctors to aid in diagnosis. Designed doctor-facing dashboard with AI assistance for efficient patient report analysis, and implemented secure user data storage with account management and data export. Tested OCR accuracy across varied input formats; validated ML prediction outputs against boundary conditions and edge cases for each disease model. AI-Powered Resume Analyzer 4th Semester | Team Project Node.js · Express.js · HTML/CSS/JS · MySQL Built a full-stack tool that parses resumes, extracts skills/experience/education, and ranks candidates against job descriptions as Top Fit, Moderate Fit, or Low Fit. Designed and validated classification boundary logic, requiring structured edge case testing with varied resume formats and incomplete data inputs. Manually tested file upload handling — including invalid file types, oversized files, and empty submissions — ensuring graceful error responses. Tracked and resolved bugs via GitHub Issues; verified database write integrity for concurrent form submissions. Hospital Management System 3rd Semester | Team Project HTML · CSS · JavaScript · PHP · MySQL Developed a web-based system for patient records, doctor appointment scheduling, and billing for hospital staff and patients. Tested role-based authentication flows — including incorrect credentials, session expiry, and unauthorized route access — to validate secure login behavior. Verified data integrity across all CRUD operations by cross-checking MySQL records after patient registration, scheduling, and billing updates.",
+    "start_char": 0,
+    "end_char": 3314
+  },
+  {
+    "vector_ref": 1,
+    "doc_id": "6a82c1aac19ff6938819450a",
+    "document_id": "6a82c1aac19ff6938819450a",
+    "filename": "resume_nainil_patel.pdf",
+    "user_id": "6a798c8dc66d9f63f83b4604",
+    "page": 2,
+    "chunk_id": 2,
+    "text": "patient records, doctor appointment scheduling, and billing for hospital staff and patients. Tested role-based authentication flows — including incorrect credentials, session expiry, and unauthorized route access — to validate secure login behavior. Verified data integrity across all CRUD operations by cross-checking MySQL records after patient registration, scheduling, and billing updates. Identified and resolved 5+ bugs during self-testing, including form re-submission errors and incorrect date validation in the appointment module. C U R R E N T L Y L E A R N I N G Manual Testing Fundamentals Test Case & Bug Report Writing SDLC / STLC Concepts Selenium WebDriver (Basics) API Testing with Postman Agile / Scrum Basics E D U C A T I O N QUALIFICATION INSTITUTION RESULT YEAR B.Tech – Computer Engineering (Pursuing) CHARUSAT University – CSPIT CGPA 5.8 (Sem 1–5) 2027 Higher Secondary (12th) BAPS, Valsad 58% 2023 Secondary (10th) BAPS, Valsad 80% 2021 S T R E N G T H S Attention to Detail:Identifies edge cases and inconsistencies in application behavior Team Collaboration:Comfortable working in group and collaborative project settings Dev-to-QA Mindset:Understands how features are built — bridges developer and tester thinking Continuous Learning:Actively pursuing QA skills through courses and hands-on practice",
+    "start_char": 2921,
+    "end_char": 4248
+  }
+]

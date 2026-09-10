@@ -1,0 +1,289 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+    --color-bg-default: #050814;
+    --color-bg-subtle: #090d1f;
+    --color-bg-surface: #0b1021;
+    --color-bg-elevated: #13192e;
+    --color-fg-default: #f8fafc;
+    --color-fg-muted: #94a3b8;
+    --color-fg-subtle: #64748b;
+    --color-border: rgba(148, 163, 184, 0.14);
+    --color-border-hover: rgba(34, 211, 238, 0.35);
+  }
+
+
+
+  /* High Contrast Accessibility Option */
+  .high-contrast .badge-low {
+    background-color: #052e16 !important;
+    color: #4ade80 !important;
+    border-color: #22c55e !important;
+    font-weight: 700 !important;
+  }
+  .high-contrast .badge-medium {
+    background-color: #451a03 !important;
+    color: #fbbf24 !important;
+    border-color: #f59e0b !important;
+    font-weight: 700 !important;
+  }
+  .high-contrast .badge-high {
+    background-color: #4c0519 !important;
+    color: #fb7185 !important;
+    border-color: #f43f5e !important;
+    font-weight: 700 !important;
+  }
+  .high-contrast .badge-critical {
+    background-color: #7f1d1d !important;
+    color: #ffffff !important;
+    border-color: #ef4444 !important;
+    font-weight: 800 !important;
+  }
+
+  /* Document Reader Density Font Sizes */
+  html[data-font-size="compact"] {
+    font-size: 14px;
+  }
+  html[data-font-size="normal"] {
+    font-size: 16px;
+  }
+  html[data-font-size="large"] {
+    font-size: 18px;
+  }
+
+  html,
+  body,
+  #root {
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+    background-color: var(--color-bg-default);
+    color: var(--color-fg-default);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  /* Accessible focus-visible state */
+  :focus-visible {
+    outline: 2px solid #22d3ee;
+    outline-offset: 2px;
+  }
+
+  /* Custom subtle scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--color-bg-default);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgba(148, 163, 184, 0.25);
+    border-radius: 9999px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(148, 163, 184, 0.4);
+  }
+}
+
+@layer components {
+  /* ==========================================================================
+     BUTTON CONVENTIONS
+     ========================================================================== */
+  .btn {
+    @apply inline-flex items-center justify-center font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 disabled:opacity-50 disabled:pointer-events-none select-none rounded-lg min-h-[38px];
+  }
+
+  .btn-sm {
+    @apply text-xs px-3 py-1.5 gap-1.5 min-h-[36px];
+  }
+
+  .btn-md {
+    @apply text-sm px-4 py-2 gap-2 min-h-[42px];
+  }
+
+  .btn-lg {
+    @apply text-base px-5 py-2.5 gap-2.5 min-h-[48px];
+  }
+
+  .btn-primary {
+    @apply bg-cyan-500 text-slate-950 hover:bg-cyan-400 active:bg-cyan-600 font-semibold shadow-sm hover:shadow-glow;
+  }
+
+  .btn-secondary {
+    @apply bg-slate-800/80 text-slate-200 hover:bg-slate-700/80 active:bg-slate-800 border border-slate-700/60;
+  }
+
+  .btn-outline {
+    @apply bg-transparent text-slate-200 border border-slate-700 hover:border-cyan-500/50 hover:text-cyan-300 hover:bg-cyan-500/10;
+  }
+
+  .btn-ghost {
+    @apply bg-transparent text-slate-400 hover:text-slate-100 hover:bg-slate-800/60;
+  }
+
+  .btn-danger {
+    @apply bg-rose-600 text-white hover:bg-rose-500 active:bg-rose-700 shadow-sm;
+  }
+
+  .btn-ai {
+    @apply bg-gradient-to-r from-cyan-500 to-indigo-500 text-white font-semibold hover:from-cyan-400 hover:to-indigo-400 shadow-md hover:shadow-glow;
+  }
+
+  /* ==========================================================================
+     FORM INPUT CONVENTIONS
+     ========================================================================== */
+  .input-base,
+  .textarea-base,
+  .select-base {
+    @apply w-full bg-[#0b1021] border border-slate-800 text-slate-100 placeholder-slate-500 text-sm rounded-lg px-3.5 py-2.5 min-h-[42px] transition-colors focus:outline-none focus:border-cyan-500/80 focus:ring-1 focus:ring-cyan-500/80 disabled:opacity-50 disabled:bg-slate-900;
+  }
+
+  .textarea-base {
+    @apply min-h-[100px] resize-y;
+  }
+
+  .input-error {
+    @apply border-rose-500/80 focus:border-rose-500 focus:ring-rose-500/80;
+  }
+
+  /* ==========================================================================
+     CARD CONVENTIONS
+     ========================================================================== */
+  .card-base {
+    @apply bg-[#0b1021]/90 backdrop-blur-sm border border-slate-800/80 rounded-xl p-5 shadow-lg;
+  }
+
+  .card-interactive {
+    @apply card-base transition-all duration-200 hover:border-cyan-500/40 hover:shadow-glow hover:-translate-y-0.5 cursor-pointer;
+  }
+
+  .card-elevated {
+    @apply bg-[#11172e] border border-slate-700/60 rounded-xl p-6 shadow-xl;
+  }
+
+  /* ==========================================================================
+     BADGE & TAG CONVENTIONS
+     ========================================================================== */
+  .badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border transition-colors;
+  }
+
+  .badge-low {
+    @apply bg-emerald-500/10 text-emerald-400 border-emerald-500/30;
+  }
+
+  .badge-medium {
+    @apply bg-amber-500/10 text-amber-400 border-amber-500/30;
+  }
+
+  .badge-high {
+    @apply bg-rose-500/10 text-rose-400 border-rose-500/30;
+  }
+
+  .badge-critical {
+    @apply bg-red-600/20 text-red-400 border-red-500/40 font-semibold;
+  }
+
+  .badge-ai {
+    @apply bg-cyan-500/10 text-cyan-300 border-cyan-500/30;
+  }
+
+  .badge-neutral {
+    @apply bg-slate-800/80 text-slate-300 border-slate-700/60;
+  }
+
+  /* ==========================================================================
+     ALERT CONVENTIONS
+     ========================================================================== */
+  .alert {
+    @apply flex items-start gap-3 p-4 rounded-xl border text-sm leading-relaxed;
+  }
+
+  .alert-info {
+    @apply bg-cyan-950/40 border-cyan-800/50 text-cyan-200;
+  }
+
+  .alert-success {
+    @apply bg-emerald-950/40 border-emerald-800/50 text-emerald-200;
+  }
+
+  .alert-warning {
+    @apply bg-amber-950/40 border-amber-800/50 text-amber-200;
+  }
+
+  .alert-error {
+    @apply bg-rose-950/40 border-rose-800/50 text-rose-200;
+  }
+
+  /* ==========================================================================
+     TOOLTIP CONVENTIONS
+     ========================================================================== */
+  .tooltip-box {
+    @apply bg-slate-900 border border-slate-700 text-slate-200 text-xs px-2.5 py-1.5 rounded-md shadow-xl backdrop-blur-md z-50 pointer-events-none;
+  }
+
+  /* ==========================================================================
+     MODAL & DROPDOWN CONVENTIONS
+     ========================================================================== */
+  .modal-backdrop {
+    @apply fixed inset-0 bg-slate-950/75 backdrop-blur-sm z-50 flex items-center justify-center p-4;
+  }
+
+  .modal-card {
+    @apply bg-[#0b1021] border border-slate-800 rounded-2xl max-w-lg w-full p-6 shadow-2xl space-y-4;
+  }
+
+  .dropdown-box {
+    @apply bg-[#0b1021] border border-slate-800 rounded-xl p-1.5 shadow-xl backdrop-blur-md z-40 min-w-[180px];
+  }
+
+  .dropdown-item {
+    @apply flex items-center gap-2 px-3 py-2 text-xs font-medium text-slate-300 hover:text-slate-100 hover:bg-slate-800/70 rounded-lg transition-colors cursor-pointer;
+  }
+
+  /* ==========================================================================
+     TABS CONVENTIONS
+     ========================================================================== */
+  .tab-nav {
+    @apply flex items-center gap-1 border-b border-slate-800 pb-px;
+  }
+
+  .tab-button {
+    @apply px-4 py-2 text-xs font-medium text-slate-400 hover:text-slate-200 border-b-2 border-transparent transition-all cursor-pointer;
+  }
+
+  .tab-button-active {
+    @apply text-cyan-400 border-cyan-400 font-semibold;
+  }
+
+  /* ==========================================================================
+     PROGRESS CONVENTIONS
+     ========================================================================== */
+  .progress-container {
+    @apply w-full bg-slate-900 border border-slate-800/80 rounded-full h-2.5 overflow-hidden;
+  }
+
+  .progress-indicator {
+    @apply bg-gradient-to-r from-cyan-500 to-indigo-500 h-full rounded-full transition-all duration-300 ease-out;
+  }
+
+  /* ==========================================================================
+     SKELETON LOADER
+     ========================================================================== */
+  .skeleton {
+    @apply bg-slate-800/60 rounded-md animate-skeleton-pulse;
+  }
+}

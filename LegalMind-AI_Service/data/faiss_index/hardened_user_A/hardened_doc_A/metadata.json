@@ -1,0 +1,14 @@
+[
+  {
+    "vector_ref": 0,
+    "doc_id": "hardened_doc_A",
+    "document_id": "hardened_doc_A",
+    "filename": "secure_agreement.pdf",
+    "user_id": "hardened_user_A",
+    "page": 1,
+    "chunk_id": 1,
+    "text": "ENTERPRISE SECURITY MASTER AGREEMENT 2026 Parties: SecureCorp Inc. and Shield Systems LLC. 1. DATA RETENTION PERIOD. Customer data shall be retained for 180 days post-termination. 2. AGGREGATE LIABILITY CAP. Total aggregate liability under this agreement shall be capped at $2,500,000 USD.",
+    "start_char": 0,
+    "end_char": 291
+  }
+]

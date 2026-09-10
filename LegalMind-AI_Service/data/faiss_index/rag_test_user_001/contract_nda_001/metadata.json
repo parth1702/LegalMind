@@ -1,0 +1,14 @@
+[
+  {
+    "vector_ref": 0,
+    "doc_id": "contract_nda_001",
+    "document_id": "contract_nda_001",
+    "filename": "document.pdf",
+    "user_id": "rag_test_user_001",
+    "page": 1,
+    "chunk_id": 1,
+    "text": "SECTION 1. CONFIDENTIALITY & TRADE SECRETS. The Receiving Party covenants that all proprietary technical designs, source code, and customer lists disclosed hereunder shall be maintained in strict confidence for a period of 5 years from disclosure. SECTION 2. LIMITATION OF LIABILITY. Neither party shall be liable for indirect, punitive, or consequential damages. Maximum aggregate liability under this agreement is strictly capped at $100,000 USD. SECTION 3. GOVERNING LAW. This Agreement shall be governed by and construed in accordance with the laws of the State of Delaware.",
+    "start_char": 0,
+    "end_char": 580
+  }
+]
