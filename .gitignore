@@ -55,3 +55,7 @@ tmp/
 # Secrets
 *.pem
 *.key
+
+contract-nli/
+data/
+docs/
