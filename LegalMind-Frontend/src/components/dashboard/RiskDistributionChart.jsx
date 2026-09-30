@@ -15,13 +15,13 @@ export default function RiskDistributionChart({ data }) {
   const totalScans = data.reduce((acc, curr) => acc + (curr.value || 0), 0);
 
   return (
-    <div className="card-base p-5 space-y-4 border-slate-800 flex flex-col justify-between">
-      <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+    <div className="card-base p-5 space-y-4 bg-white dark:bg-card border-slate-200 dark:border-slate-800 shadow-sm flex flex-col justify-between">
+      <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3">
         <div>
-          <h3 className="text-sm font-bold text-slate-100 uppercase tracking-wider font-mono">
+          <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 uppercase tracking-wider font-mono">
             Repository Risk Distribution
           </h3>
-          <p className="text-[11px] text-slate-400">Categorized by playbook severity</p>
+          <p className="text-[11px] text-slate-500 dark:text-slate-400">Categorized by playbook severity</p>
         </div>
         <span className="badge badge-ai">Multi-Tier Classification</span>
       </div>
@@ -42,7 +42,7 @@ export default function RiskDistributionChart({ data }) {
                 dataKey="value"
               >
                 {data.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={entry.color} stroke="#050814" strokeWidth={2} />
+                  <Cell key={`cell-${index}`} fill={entry.color} stroke="#ffffff" strokeWidth={2} />
                 ))}
               </Pie>
               <Tooltip
@@ -50,9 +50,9 @@ export default function RiskDistributionChart({ data }) {
                   if (active && payload && payload.length) {
                     const item = payload[0].payload;
                     return (
-                      <div className="tooltip-box font-mono">
-                        <span className="font-bold block" style={{ color: item.color }}>{item.name}</span>
-                        <span className="text-slate-200">{item.value} Documents ({item.label})</span>
+                      <div className="tooltip-box font-mono bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xl p-2.5 rounded-lg">
+                        <span className="font-bold block text-xs" style={{ color: item.color }}>{item.name}</span>
+                        <span className="text-slate-700 dark:text-slate-200 text-xs">{item.value} Documents ({item.label})</span>
                       </div>
                     );
                   }
@@ -62,8 +62,8 @@ export default function RiskDistributionChart({ data }) {
             </PieChart>
           </ResponsiveContainer>
           <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-            <span className="text-xl font-bold font-mono text-slate-100">{totalScans}</span>
-            <span className="text-[10px] text-slate-400 font-mono">Total Risk Scans</span>
+            <span className="text-xl font-bold font-mono text-slate-900 dark:text-slate-100">{totalScans}</span>
+            <span className="text-[10px] text-slate-500 dark:text-slate-400 font-mono">Total Risk Scans</span>
           </div>
         </div>
 
@@ -74,16 +74,16 @@ export default function RiskDistributionChart({ data }) {
             return (
               <div
                 key={idx}
-                className="flex items-center justify-between p-2 rounded-lg bg-slate-900/60 border border-slate-800/80 text-xs"
+                className="flex items-center justify-between p-2 rounded-lg bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800/80 text-xs"
               >
                 <div className="flex items-center gap-2">
                   <IconComponent className="w-4 h-4 shrink-0" style={{ color: item.color }} />
                   <div>
-                    <span className="font-semibold text-slate-200 block leading-none">{item.name}</span>
-                    <span className="text-[10px] text-slate-400 leading-none">{item.label}</span>
+                    <span className="font-semibold text-slate-900 dark:text-slate-200 block leading-none">{item.name}</span>
+                    <span className="text-[10px] text-slate-500 dark:text-slate-400 leading-none">{item.label}</span>
                   </div>
                 </div>
-                <span className="font-mono font-bold text-slate-200 text-sm">{item.value}</span>
+                <span className="font-mono font-bold text-slate-900 dark:text-slate-200 text-sm">{item.value}</span>
               </div>
             );
           })}

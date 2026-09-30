@@ -29,3 +29,9 @@ easyocr>=1.7.0
 
 # Utilities
 requests>=2.31.0
+
+# Google Gemini AI SDK
+google-genai>=1.0.0
+
+# BM25 Sparse Retrieval (Hybrid Search)
+rank-bm25>=0.2.2

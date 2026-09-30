@@ -13,17 +13,17 @@ export default function RiskScoreCard({ riskScore, riskLevel, modelVersion }) {
   const RiskIcon = risk.icon;
 
   return (
-    <div className="card-base p-6 border-slate-800 space-y-5 bg-[#0b1021]/95 backdrop-blur-md flex flex-col justify-between shadow-xl relative overflow-hidden group hover:border-cyan-500/40 transition-all">
+    <div className="card-base p-6 border-slate-200 dark:border-slate-800 space-y-5 bg-white dark:bg-[#0b1021]/95 flex flex-col justify-between shadow-sm relative overflow-hidden group hover:border-blue-400 dark:hover:border-cyan-500/40 transition-all">
       {/* Background Subtle Gradient Glow */}
       <div
-        className="absolute -right-12 -top-12 w-32 h-32 rounded-full blur-3xl opacity-20 pointer-events-none"
+        className="absolute -right-12 -top-12 w-32 h-32 rounded-full blur-3xl opacity-15 pointer-events-none"
         style={{ backgroundColor: risk.color }}
       />
 
-      <div className="flex items-center justify-between border-b border-slate-800/80 pb-3 relative z-10">
+      <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800/80 pb-3 relative z-10">
         <div className="flex items-center gap-2">
-          <ShieldCheck className="w-4 h-4 text-cyan-400" />
-          <span className="text-xs font-mono font-bold text-slate-200 uppercase tracking-wider">
+          <ShieldCheck className="w-4 h-4 text-blue-600 dark:text-cyan-400" />
+          <span className="text-xs font-mono font-bold text-slate-900 dark:text-slate-200 uppercase tracking-wider">
             AI Legal Exposure Index
           </span>
         </div>
@@ -33,11 +33,11 @@ export default function RiskScoreCard({ riskScore, riskLevel, modelVersion }) {
       <div className="flex items-center justify-between gap-4 relative z-10 py-1">
         {/* Score Number Gauge */}
         <div className="space-y-1">
-          <div className="text-5xl font-extrabold font-mono text-slate-100 tracking-tight flex items-baseline gap-1.5">
-            <span className="drop-shadow-md">{riskScore}</span>
-            <span className="text-base text-slate-500 font-normal">/ 100</span>
+          <div className="text-5xl font-extrabold font-mono text-slate-900 dark:text-slate-100 tracking-tight flex items-baseline gap-1.5">
+            <span>{riskScore}</span>
+            <span className="text-base text-slate-400 font-normal">/ 100</span>
           </div>
-          <p className="text-xs text-slate-300 font-sans font-medium">{risk.text}</p>
+          <p className="text-xs text-slate-600 dark:text-slate-300 font-sans font-medium">{risk.text}</p>
         </div>
 
         {/* Risk Level Badge */}
@@ -46,15 +46,15 @@ export default function RiskScoreCard({ riskScore, riskLevel, modelVersion }) {
             <RiskIcon className="w-4 h-4" />
             <span className="font-bold">{risk.label}</span>
           </span>
-          <span className="text-[10px] font-mono text-slate-400 block uppercase tracking-wider font-semibold">
+          <span className="text-[10px] font-mono text-slate-500 dark:text-slate-400 block uppercase tracking-wider font-semibold">
             Indian Statutory Standard
           </span>
         </div>
       </div>
 
       {/* Risk Progress Track */}
-      <div className="space-y-2 pt-3 border-t border-slate-800/80 relative z-10">
-        <div className="progress-container h-3 bg-slate-950 border border-slate-800/90 p-0.5">
+      <div className="space-y-2 pt-3 border-t border-slate-200 dark:border-slate-800/80 relative z-10">
+        <div className="progress-container h-3 bg-slate-100 dark:bg-slate-950 border border-slate-200 dark:border-slate-800/90 p-0.5">
           <div
             className="h-full rounded-full transition-all duration-700 ease-out shadow-sm"
             style={{
@@ -63,7 +63,7 @@ export default function RiskScoreCard({ riskScore, riskLevel, modelVersion }) {
             }}
           />
         </div>
-        <div className="flex justify-between text-[10px] font-mono text-slate-400 font-semibold">
+        <div className="flex justify-between text-[10px] font-mono text-slate-500 dark:text-slate-400 font-semibold">
           <span>0 (Standard)</span>
           <span>40 (Moderate)</span>
           <span>75 (High Exposure)</span>

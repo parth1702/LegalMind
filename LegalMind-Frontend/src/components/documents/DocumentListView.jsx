@@ -37,11 +37,11 @@ export default function DocumentListView({
   onOpenActionModal,
 }) {
   return (
-    <div className="card-base p-0 overflow-hidden border-slate-800">
+    <div className="card-base p-0 overflow-hidden bg-white dark:bg-card border-slate-200 dark:border-slate-800 shadow-sm">
       <div className="overflow-x-auto">
         <table className="w-full text-left border-collapse">
           <thead>
-            <tr className="border-b border-slate-800 text-[11px] font-mono text-slate-400 uppercase tracking-wider bg-slate-900/40">
+            <tr className="border-b border-slate-200 dark:border-slate-800 text-[11px] font-mono text-slate-500 dark:text-slate-400 uppercase tracking-wider bg-slate-50 dark:bg-slate-900/40">
               <th className="py-3 px-4">Document</th>
               <th className="py-3 px-4">Type</th>
               <th className="py-3 px-4">Status</th>
@@ -51,7 +51,7 @@ export default function DocumentListView({
               <th className="py-3 px-4 text-right">Actions</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-slate-800/60 text-xs">
+          <tbody className="divide-y divide-slate-100 dark:divide-slate-800/60 text-xs">
             {documents.map((doc) => {
               const riskKey = (doc.riskLevel || 'low').toLowerCase();
               const risk = riskConfig[riskKey] || riskConfig.low;
@@ -60,14 +60,14 @@ export default function DocumentListView({
               const StatusIcon = status.icon;
 
               return (
-                <tr key={doc.id} className="hover:bg-slate-900/50 transition-colors group">
+                <tr key={doc.id} className="hover:bg-slate-50 dark:hover:bg-slate-900/50 transition-colors group">
                   {/* Document Name & Favorite */}
-                  <td className="py-3 px-4 font-semibold text-slate-200">
+                  <td className="py-3 px-4 font-semibold text-slate-900 dark:text-slate-200">
                     <div className="flex items-center gap-3">
                       <button
                         type="button"
                         onClick={() => onToggleFavorite(doc.id)}
-                        className="text-slate-500 hover:text-amber-400 transition-colors shrink-0"
+                        className="text-slate-400 hover:text-amber-500 transition-colors shrink-0"
                         aria-label="Toggle favorite"
                       >
                         <Star
@@ -77,12 +77,12 @@ export default function DocumentListView({
                         />
                       </button>
 
-                      <div className="p-1.5 rounded-lg bg-slate-900 border border-slate-800 text-cyan-400 shrink-0">
+                      <div className="p-1.5 rounded-lg bg-blue-50 dark:bg-slate-900 border border-blue-200 dark:border-slate-800 text-blue-600 dark:text-cyan-400 shrink-0">
                         <FileText className="w-4 h-4" />
                       </div>
 
                       <div className="min-w-0">
-                        <span className="truncate block font-bold text-slate-100 group-hover:text-cyan-300 transition-colors max-w-[240px] sm:max-w-[300px]">
+                        <span className="truncate block font-bold text-slate-900 dark:text-slate-100 group-hover:text-blue-600 dark:group-hover:text-cyan-300 transition-colors max-w-[240px] sm:max-w-[300px]">
                           {doc.name}
                         </span>
                         <span className="text-[10px] font-mono text-slate-500">{doc.size}</span>
@@ -91,7 +91,7 @@ export default function DocumentListView({
                   </td>
 
                   {/* Document Type */}
-                  <td className="py-3 px-4 font-mono text-[11px] text-slate-400">
+                  <td className="py-3 px-4 font-mono text-[11px] text-slate-500 dark:text-slate-400">
                     {doc.type}
                   </td>
 
@@ -114,18 +114,18 @@ export default function DocumentListView({
                   {/* Risk Score Progress Bar */}
                   <td className="py-3 px-4">
                     <div className="w-24 space-y-1">
-                      <div className="flex justify-between text-[10px] font-mono text-slate-400">
+                      <div className="flex justify-between text-[10px] font-mono text-slate-500 dark:text-slate-400">
                         <span>Index</span>
-                        <span className="font-bold text-slate-200">{doc.riskScore}%</span>
+                        <span className="font-bold text-slate-900 dark:text-slate-200">{doc.riskScore}%</span>
                       </div>
-                      <div className="progress-container h-1.5">
+                      <div className="progress-container h-1.5 bg-slate-100 dark:bg-slate-800">
                         <div
                           className="h-full rounded-full transition-all"
                           style={{
                             width: `${doc.riskScore}%`,
                             backgroundColor:
                               doc.riskScore > 70
-                                ? '#f43f5e'
+                                ? '#ef4444'
                                 : doc.riskScore > 40
                                 ? '#f59e0b'
                                 : '#10b981',
@@ -136,7 +136,7 @@ export default function DocumentListView({
                   </td>
 
                   {/* Date */}
-                  <td className="py-3 px-4 font-mono text-[11px] text-slate-400">
+                  <td className="py-3 px-4 font-mono text-[11px] text-slate-500 dark:text-slate-400">
                     {doc.uploadDate}
                   </td>
 
@@ -145,7 +145,7 @@ export default function DocumentListView({
                     <div className="flex items-center justify-end gap-1">
                       <Link
                         to={`/app/analysis/${doc.id}`}
-                        className="p-1.5 rounded-lg text-slate-400 hover:text-cyan-300 hover:bg-slate-800 transition-colors"
+                        className="p-1.5 rounded-lg text-slate-400 hover:text-blue-600 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
                         title="View Analysis"
                       >
                         <Eye className="w-4 h-4" />
@@ -154,7 +154,7 @@ export default function DocumentListView({
                       <button
                         type="button"
                         onClick={() => onOpenActionModal(doc, 'download')}
-                        className="p-1.5 rounded-lg text-slate-400 hover:text-slate-200 hover:bg-slate-800 transition-colors"
+                        className="p-1.5 rounded-lg text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
                         title="Download Document"
                       >
                         <Download className="w-4 h-4" />
@@ -163,7 +163,7 @@ export default function DocumentListView({
                       <button
                         type="button"
                         onClick={() => onOpenActionModal(doc, 'archive')}
-                        className="p-1.5 rounded-lg text-slate-400 hover:text-amber-400 hover:bg-slate-800 transition-colors"
+                        className="p-1.5 rounded-lg text-slate-400 hover:text-amber-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
                         title="Archive Document"
                       >
                         <Archive className="w-4 h-4" />
@@ -172,7 +172,7 @@ export default function DocumentListView({
                       <button
                         type="button"
                         onClick={() => onOpenActionModal(doc, 'delete')}
-                        className="p-1.5 rounded-lg text-slate-400 hover:text-rose-400 hover:bg-slate-800 transition-colors"
+                        className="p-1.5 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
                         title="Delete Document"
                       >
                         <Trash2 className="w-4 h-4" />

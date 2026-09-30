@@ -31,41 +31,41 @@ export default function AiAnalysisSkeleton({ onComplete }) {
   const currentStage = STAGES[currentIdx] || STAGES[0];
 
   return (
-    <div className="card-elevated p-6 sm:p-8 bg-[#070b18]/95 border-slate-800 space-y-8 animate-in fade-in duration-300 relative overflow-hidden">
+    <div className="card-elevated p-6 sm:p-8 bg-white dark:bg-[#070b18]/95 border-slate-200 dark:border-slate-800 space-y-8 animate-in fade-in duration-300 relative overflow-hidden shadow-sm">
       {/* Background Animated Scanning Grid Light */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#1f293d0a_1px,transparent_1px),linear-gradient(to_bottom,#1f293d0a_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
 
       {/* Header Pipeline Tracker */}
       <div className="space-y-4 text-center max-w-xl mx-auto relative z-10">
         <div className="relative mx-auto w-16 h-16 flex items-center justify-center">
-          <div className="absolute inset-0 rounded-2xl bg-cyan-500/20 blur-md animate-pulse" />
+          <div className="absolute inset-0 rounded-2xl bg-blue-500/10 blur-md animate-pulse" />
           <LogoMark size="lg" animated />
         </div>
 
         <div className="space-y-1.5">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 text-[11px] font-mono font-semibold">
-            <Sparkles className="w-3.5 h-3.5 text-cyan-400 animate-spin" />
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 border border-blue-200 text-blue-700 dark:bg-cyan-500/10 dark:border-cyan-500/30 dark:text-cyan-300 text-[11px] font-mono font-semibold">
+            <Sparkles className="w-3.5 h-3.5 text-blue-600 dark:text-cyan-400 animate-spin" />
             <span>NEURAL CONTRACT INTELLIGENCE PIPELINE</span>
           </div>
-          <h2 className="text-lg font-bold text-slate-100 font-mono tracking-tight">
+          <h2 className="text-lg font-bold text-slate-900 dark:text-slate-100 font-mono tracking-tight">
             Stage {currentIdx + 1} of 5: {currentStage.label}
           </h2>
-          <p className="text-xs text-slate-400 font-sans">
+          <p className="text-xs text-slate-500 dark:text-slate-400 font-sans">
             {currentStage.desc}...
           </p>
         </div>
 
         {/* Shimmering Progress Bar */}
         <div className="space-y-1">
-          <div className="progress-container h-2.5 bg-slate-900 border border-slate-800">
+          <div className="progress-container h-2.5 bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
             <div
-              className="progress-indicator bg-gradient-to-r from-cyan-500 via-indigo-500 to-cyan-400 shadow-glow"
+              className="progress-indicator bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-500 shadow-sm"
               style={{ width: `${currentStage.progress}%` }}
             />
           </div>
-          <div className="flex items-center justify-between text-[10px] font-mono text-slate-400">
+          <div className="flex items-center justify-between text-[10px] font-mono text-slate-500 dark:text-slate-400">
             <span>Model: LegalMind Core Engine</span>
-            <span className="text-cyan-300 font-bold">{currentStage.progress}% Complete</span>
+            <span className="text-blue-600 dark:text-cyan-300 font-bold">{currentStage.progress}% Complete</span>
           </div>
         </div>
       </div>
@@ -81,19 +81,19 @@ export default function AiAnalysisSkeleton({ onComplete }) {
               key={s.id}
               className={`p-3 rounded-xl border transition-all duration-300 ${
                 isDone
-                  ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-400 shadow-sm'
+                  ? 'bg-emerald-50 border-emerald-200 text-emerald-700 shadow-sm dark:bg-emerald-500/10 dark:border-emerald-500/30 dark:text-emerald-400'
                   : isCurrent
-                  ? 'bg-cyan-500/15 border-cyan-500/40 text-cyan-300 font-bold ring-1 ring-cyan-500/30 shadow-glow'
-                  : 'bg-slate-900/40 border-slate-800 text-slate-500 opacity-60'
+                  ? 'bg-blue-50 border-blue-300 text-blue-700 font-bold shadow-sm dark:bg-cyan-500/15 dark:border-cyan-500/40 dark:text-cyan-300'
+                  : 'bg-slate-50 border-slate-200 text-slate-400 opacity-60 dark:bg-slate-900/40 dark:border-slate-800 dark:text-slate-500'
               }`}
             >
               <div className="flex items-center gap-2">
                 {isDone ? (
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0" />
                 ) : isCurrent ? (
-                  <Cpu className="w-3.5 h-3.5 text-cyan-400 animate-spin shrink-0" />
+                  <Cpu className="w-3.5 h-3.5 text-blue-600 dark:text-cyan-400 animate-spin shrink-0" />
                 ) : (
-                  <span className="w-3.5 h-3.5 rounded-full border border-slate-700 block shrink-0" />
+                  <span className="w-3.5 h-3.5 rounded-full border border-slate-300 dark:border-slate-700 block shrink-0" />
                 )}
                 <span className="truncate leading-tight">{s.label}</span>
               </div>
@@ -103,13 +103,13 @@ export default function AiAnalysisSkeleton({ onComplete }) {
       </div>
 
       {/* Futuristic Radar Document Skeleton Preview */}
-      <div className="space-y-4 pt-6 border-t border-slate-800/80 relative z-10">
-        <div className="flex items-center justify-between text-xs font-mono text-slate-400">
+      <div className="space-y-4 pt-6 border-t border-slate-200 dark:border-slate-800/80 relative z-10">
+        <div className="flex items-center justify-between text-xs font-mono text-slate-500 dark:text-slate-400">
           <span className="flex items-center gap-2">
-            <FileSearch className="w-4 h-4 text-cyan-400" />
+            <FileSearch className="w-4 h-4 text-blue-600 dark:text-cyan-400" />
             Synthesizing Document Structure...
           </span>
-          <span className="flex items-center gap-2 text-indigo-400">
+          <span className="flex items-center gap-2 text-indigo-600 dark:text-indigo-400">
             <Scale className="w-4 h-4" />
             Applying Indian Statutory Lexicon
           </span>
@@ -117,7 +117,7 @@ export default function AiAnalysisSkeleton({ onComplete }) {
 
         {/* Cards Skeleton Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
-          <div className="lg:col-span-4 p-5 rounded-2xl bg-slate-900/60 border border-slate-800 space-y-3">
+          <div className="lg:col-span-4 p-5 rounded-2xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 space-y-3">
             <div className="flex items-center justify-between">
               <div className="skeleton h-4 w-28" />
               <div className="skeleton h-5 w-16 rounded-full" />
@@ -126,7 +126,7 @@ export default function AiAnalysisSkeleton({ onComplete }) {
             <div className="skeleton h-2.5 w-full rounded-full" />
           </div>
 
-          <div className="lg:col-span-8 p-5 rounded-2xl bg-slate-900/60 border border-slate-800 space-y-3">
+          <div className="lg:col-span-8 p-5 rounded-2xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 space-y-3">
             <div className="skeleton h-4 w-40" />
             <div className="skeleton h-14 w-full rounded-xl" />
             <div className="grid grid-cols-2 gap-2">

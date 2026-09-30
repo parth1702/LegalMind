@@ -6,59 +6,11 @@ const ActivityLog = require('../models/ActivityLog');
 const { AI_SERVICE_URL } = require('../config/aiConfig');
 
 /**
- * Generate intelligent statutory & contract co-pilot fallback response when primary RAG service is unreachable or timing out.
+ * Simple fallback when AI Service is completely unreachable.
+ * All intelligent responses are now handled by the Agentic RAG pipeline in the AI Service.
  */
-function generateLegalFallbackAnswer(query, docTitle = '') {
-  const q = query.toLowerCase();
-  const docName = docTitle ? `"${docTitle}"` : 'the active contract';
-
-  if (q.includes('indemnif') || q.includes('liabil') || q.includes('risk') || q.includes('exposure')) {
-    return `### ⚖️ Legal Co-Pilot Analysis: Indemnification & Risk Exposures in ${docName}
-
-Based on commercial contract law standards and legal risk analysis:
-
-1. **Indemnification Scope**:
-   - Standard indemnification clauses obligate one party to compensate the other for losses, damages, or legal fees resulting from breach of warranty, third-party intellectual property infringement, or gross negligence.
-   - **Key Exposure Point**: Audit whether indemnity obligations are mutual or unilateral. Unilateral indemnities significantly elevate financial risk for the performing party.
-
-2. **Limitation of Liability Caps**:
-   - Typical commercial agreements limit overall aggregate liability to 1x to 2x the fees paid in the preceding 12 months.
-   - **Critical Carve-Outs**: Ensure exclusions for indirect, consequential, and punitive damages are explicitly stated.
-
-3. **Recommended Mitigation**:
-   - Require mutual indemnification caps.
-   - Introduce express written notice requirements (e.g., within 30 days of claim) for any third-party indemnity demands.
-
-*Legal Co-Pilot Statutory Intelligence Active.*`;
-  }
-
-  if (q.includes('terminat') || q.includes('cancel') || q.includes('notice') || q.includes('renew')) {
-    return `### 📋 Legal Co-Pilot Analysis: Termination & Renewal Provisions in ${docName}
-
-Standard statutory legal framework for contract termination and exit terms:
-
-1. **Termination for Convenience**: Standard provisions permit termination without cause by providing 30 to 60 days prior written notice.
-2. **Termination for Cause**: Triggered by material breach, with a mandatory cure period (typically 15–30 days) following written breach notification.
-3. **Post-Termination Survival**: Obligations regarding Confidentiality, IP Rights, and Dispute Resolution survive agreement expiry.`;
-  }
-
-  if (q.includes('confidential') || q.includes('privacy') || q.includes('data') || q.includes('dpdp') || q.includes('gdpr')) {
-    return `### 🔒 Legal Co-Pilot Analysis: Confidentiality & Data Protection in ${docName}
-
-Legal framework governing proprietary information and statutory compliance:
-
-1. **Confidentiality Standard**: Defines protected technical, operational, and commercial data, enforcing a standard of reasonable care.
-2. **Statutory Data Privacy**: Compliance obligations under digital personal data protection statutes (e.g., DPDP Act / GDPR) require strict data processing consent and security measures.`;
-  }
-
-  return `### 🏛️ Legal Co-Pilot Guidance regarding ${docName}
-
-In response to your legal query ("${query}"):
-
-1. **Statutory Interpretation**: Under standard contract construction principles, contractual terms are interpreted according to their plain legal meaning and explicit definitions.
-2. **Operational Recommendations**: Verify key obligations, governing law, jurisdiction clauses, and notice mechanisms outlined in the agreement.
-
-*Legal Co-Pilot Active.*`;
+function generateFallbackAnswer(query) {
+  return `The AI Legal Co-Pilot is temporarily unavailable. Please ensure the AI Service is running and try again.\n\nYour query: "${query}"`;
 }
 
 /**
@@ -124,7 +76,15 @@ const sendQuery = async (req, res, next) => {
 
     await conversation.save();
 
-    // Call FastAPI AI Service RAG endpoint with 15s timeout
+    // Build conversation history for multi-turn context (last 5 turns)
+    const recentMessages = conversation.messages
+      .slice(-5)
+      .map((msg) => ({
+        role: msg.sender === 'user' ? 'user' : 'assistant',
+        content: (msg.content || '').substring(0, 500),
+      }));
+
+    // Call FastAPI AI Service Agentic RAG endpoint with 30s timeout
     let ragResult;
 
     try {
@@ -136,8 +96,9 @@ const sendQuery = async (req, res, next) => {
           document_id: targetDocId,
           top_k: 4,
           min_score: 0.15,
+          conversation_history: recentMessages,
         },
-        { timeout: 15000 }
+        { timeout: 30000 }
       );
 
       if (aiResponse.data && aiResponse.data.answer) {
@@ -146,13 +107,12 @@ const sendQuery = async (req, res, next) => {
         throw new Error('Empty or invalid response from AI service');
       }
     } catch (aiErr) {
-      console.warn('AI Service RAG query note:', aiErr.message);
-      const fallbackAnswer = generateLegalFallbackAnswer(query.trim(), docTitle);
+      console.warn('AI Service RAG query error:', aiErr.message);
       ragResult = {
-        success: true,
-        answer: fallbackAnswer,
+        success: false,
+        answer: generateFallbackAnswer(query.trim()),
         evidence_found: false,
-        confidence_score: 0.85,
+        confidence_score: 0.0,
         sources: [],
       };
     }

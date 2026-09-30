@@ -4,7 +4,7 @@ const ThemeContext = createContext();
 
 export function ThemeProvider({ children }) {
   const [theme, setThemeState] = useState(() => {
-    return localStorage.getItem('legalmind_theme') || 'dark';
+    return localStorage.getItem('legalmind_theme') || 'light';
   });
 
   const [fontSize, setFontSizeState] = useState(() => {
@@ -20,9 +20,17 @@ export function ThemeProvider({ children }) {
 
   useEffect(() => {
     const root = document.documentElement;
-    root.classList.remove('light');
-    localStorage.setItem('legalmind_theme', 'dark');
-  }, []);
+    if (theme === 'light') {
+      root.classList.add('light');
+      root.classList.remove('dark');
+      setIsLightActive(true);
+    } else {
+      root.classList.add('dark');
+      root.classList.remove('light');
+      setIsLightActive(false);
+    }
+    localStorage.setItem('legalmind_theme', theme);
+  }, [theme]);
 
   useEffect(() => {
     const root = document.documentElement;

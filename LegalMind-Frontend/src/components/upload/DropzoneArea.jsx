@@ -64,7 +64,7 @@ export default function DropzoneArea({ onFilesSelected }) {
       {/* Validation Error Notice */}
       {errorMessage && (
         <div className="alert alert-error animate-in fade-in duration-150">
-          <AlertCircle className="w-4 h-4 text-rose-400 shrink-0 mt-0.5" />
+          <AlertCircle className="w-4 h-4 text-rose-500 shrink-0 mt-0.5" />
           <span className="text-xs font-semibold">{errorMessage}</span>
         </div>
       )}
@@ -80,8 +80,8 @@ export default function DropzoneArea({ onFilesSelected }) {
           flex flex-col items-center justify-center space-y-4
           ${
             isDragOver
-              ? 'border-cyan-400 bg-cyan-500/10 shadow-glow'
-              : 'border-slate-800 hover:border-slate-700 bg-slate-950/60 hover:bg-slate-900/60'
+              ? 'border-blue-500 bg-blue-50 dark:border-cyan-400 dark:bg-cyan-500/10'
+              : 'border-slate-300 dark:border-slate-800 hover:border-blue-400 dark:hover:border-slate-700 bg-slate-50/50 hover:bg-slate-100/50 dark:bg-slate-950/60 dark:hover:bg-slate-900/60'
           }
         `}
       >
@@ -94,28 +94,28 @@ export default function DropzoneArea({ onFilesSelected }) {
           className="hidden"
         />
 
-        <div className="w-16 h-16 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 shadow-sm">
+        <div className="w-16 h-16 rounded-2xl bg-blue-50 dark:bg-cyan-500/10 border border-blue-200 dark:border-cyan-500/30 flex items-center justify-center text-blue-600 dark:text-cyan-400 shadow-sm">
           <UploadCloud className="w-8 h-8" />
         </div>
 
         <div className="space-y-1 max-w-sm">
-          <h3 className="text-base font-bold text-slate-100">
+          <h3 className="text-base font-bold text-slate-900 dark:text-slate-100">
             Drag & drop legal documents here
           </h3>
-          <p className="text-xs text-slate-400 leading-relaxed">
-            or <span className="text-cyan-400 font-semibold underline">browse files</span> from your computer. Supports batch uploading.
+          <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+            or <span className="text-blue-600 dark:text-cyan-400 font-semibold underline">browse files</span> from your computer. Supports batch uploading.
           </p>
         </div>
 
         {/* Accepted formats badge list */}
-        <div className="flex items-center gap-2 pt-2 text-[11px] font-mono text-slate-400">
-          <span className="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-slate-300">
+        <div className="flex items-center gap-2 pt-2 text-[11px] font-mono text-slate-500 dark:text-slate-400">
+          <span className="px-2 py-0.5 rounded bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300">
             PDF (.pdf)
           </span>
-          <span className="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-slate-300">
+          <span className="px-2 py-0.5 rounded bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300">
             Word (.docx)
           </span>
-          <span className="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-slate-300">
+          <span className="px-2 py-0.5 rounded bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300">
             Text (.txt)
           </span>
           <span>• Max 25MB</span>

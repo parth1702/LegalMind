@@ -17,34 +17,34 @@ export default function UploadStageTracker({ currentStage, progress, isFailed })
     <div className="space-y-2.5 pt-2">
       {/* Progress Header */}
       <div className="flex items-center justify-between text-xs font-mono">
-        <span className="text-slate-300 font-semibold flex items-center gap-1.5">
+        <span className="text-slate-700 dark:text-slate-300 font-semibold flex items-center gap-1.5">
           {isFailed ? (
-            <span className="text-rose-400 flex items-center gap-1">
+            <span className="text-rose-600 dark:text-rose-400 flex items-center gap-1">
               <AlertCircle className="w-3.5 h-3.5" /> Processing Failed
             </span>
           ) : currentStage === 'complete' ? (
-            <span className="text-emerald-400 flex items-center gap-1 font-bold">
+            <span className="text-emerald-600 dark:text-emerald-400 flex items-center gap-1 font-bold">
               <CheckCircle2 className="w-3.5 h-3.5" /> Contract Analysis Verified
             </span>
           ) : (
-            <span className="text-cyan-300 flex items-center gap-1.5">
-              <Sparkles className="w-3.5 h-3.5 text-cyan-400 animate-spin" />
+            <span className="text-blue-600 dark:text-cyan-300 flex items-center gap-1.5">
+              <Sparkles className="w-3.5 h-3.5 text-blue-600 dark:text-cyan-400 animate-spin" />
               <span>Pipeline: {STAGES[currentIdx]?.label || 'Processing...'}</span>
             </span>
           )}
         </span>
-        <span className="text-cyan-400 font-bold font-mono">{progress}%</span>
+        <span className="text-blue-600 dark:text-cyan-400 font-bold font-mono">{progress}%</span>
       </div>
 
       {/* Progress Bar */}
-      <div className="progress-container h-2.5 bg-slate-950 border border-slate-800 p-0.5">
+      <div className="progress-container h-2.5 bg-slate-200 dark:bg-slate-950 border border-slate-300 dark:border-slate-800 p-0.5">
         <div
           className={`h-full rounded-full transition-all duration-500 ease-out shadow-sm ${
             isFailed
               ? 'bg-rose-500'
               : currentStage === 'complete'
               ? 'bg-emerald-500'
-              : 'bg-gradient-to-r from-cyan-500 via-indigo-500 to-cyan-400 shadow-glow'
+              : 'bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-500'
           }`}
           style={{ width: `${progress}%` }}
         />
@@ -61,12 +61,12 @@ export default function UploadStageTracker({ currentStage, progress, isFailed })
               key={stage.id}
               className={`shrink-0 px-2 py-0.5 rounded-md transition-all ${
                 isDone
-                  ? 'text-emerald-400 bg-emerald-500/10 border border-emerald-500/20'
+                  ? 'text-emerald-700 bg-emerald-50 border border-emerald-200 dark:text-emerald-400 dark:bg-emerald-500/10 dark:border-emerald-500/20'
                   : isCurrent
-                  ? 'text-cyan-300 bg-cyan-500/20 font-bold border border-cyan-500/40 shadow-sm'
+                  ? 'text-blue-700 bg-blue-50 font-bold border border-blue-300 shadow-sm dark:text-cyan-300 dark:bg-cyan-500/20 dark:border-cyan-500/40'
                   : isFailed && idx === currentIdx
-                  ? 'text-rose-400 bg-rose-500/10'
-                  : 'text-slate-600'
+                  ? 'text-rose-700 bg-rose-50 dark:text-rose-400 dark:bg-rose-500/10'
+                  : 'text-slate-400 dark:text-slate-600'
               }`}
             >
               {stage.label}

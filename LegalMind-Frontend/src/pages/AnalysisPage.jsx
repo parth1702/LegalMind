@@ -12,8 +12,12 @@ import RiskScoreCard from '../components/ai-analysis/RiskScoreCard';
 import ExecutiveSummaryCard from '../components/ai-analysis/ExecutiveSummaryCard';
 import EvidenceFindingsCard from '../components/ai-analysis/EvidenceFindingsCard';
 import StrategyRecommendationsCard from '../components/ai-analysis/StrategyRecommendationsCard';
+import ContractVisualDiagram from '../components/analysis/ContractVisualDiagram';
+import LegalGlossaryCard from '../components/analysis/LegalGlossaryCard';
+import ContractActionRoadmapCard from '../components/analysis/ContractActionRoadmapCard';
+import SourceEvidenceDrawer from '../components/documents/SourceEvidenceDrawer';
 import { downloadAsPdf } from '../utils/archiveUtils';
-import { getDocumentsApi, getAnalysisByDocumentIdApi, getDocumentByIdApi } from '../services/documentService';
+import { getDocumentsApi, getAnalysisByDocumentIdApi, getDocumentByIdApi, getContractRoadmapApi } from '../services/documentService';
 import apiClient from '../services/api';
 import { useUpload } from '../context/useUpload';
 import { Sparkles, FileText, Layout, RefreshCw, Download, UploadCloud, ChevronDown, AlertCircle } from 'lucide-react';
@@ -22,6 +26,7 @@ export default function AnalysisPage() {
   const { id: routeDocId } = useParams();
   const navigate = useNavigate();
   const { openUploadModal } = useUpload();
+  const [sourceDrawerState, setSourceDrawerState] = useState({ isOpen: false, item: null });
 
   const [viewMode, setViewMode] = useState('report'); // 'report' | 'viewer' | 'loading'
   const [selectedDocId, setSelectedDocId] = useState(routeDocId || '');
@@ -67,6 +72,13 @@ export default function AnalysisPage() {
 
   const activeDocObj = rawDocs.find((d) => (d._id || d.id) === selectedDocId) || docDetailsResponse?.document || {};
   const realExtractedText = activeDocObj?.extractedText || docDetailsResponse?.document?.extractedText || '';
+
+  // Fetch Action Roadmap (DO, DO NOT, REMEMBER, NEXT STEPS)
+  const { data: roadmapResponse, isLoading: isLoadingRoadmap } = useQuery({
+    queryKey: ['contract-action-roadmap', selectedDocId, realExtractedText],
+    queryFn: () => getContractRoadmapApi(selectedDocId, realExtractedText),
+    enabled: Boolean(selectedDocId),
+  });
 
   const realPagesContent = realExtractedText
     ? realExtractedText.split('\n\n--- Page ').map((chunk, index) => ({
@@ -166,7 +178,7 @@ export default function AnalysisPage() {
                 <select
                   value={selectedDocId}
                   onChange={handleSelectDocChange}
-                  className="bg-slate-900 border border-slate-800 text-xs font-mono text-cyan-300 rounded-xl px-3 py-2 pr-8 focus:outline-none focus:border-cyan-500 max-w-[200px] truncate appearance-none"
+                  className="input-base text-xs font-mono rounded-xl px-3 py-2 pr-8 max-w-[200px] truncate appearance-none"
                 >
                   {rawDocs.map((doc) => (
                     <option key={doc._id || doc.id} value={doc._id || doc.id}>
@@ -179,14 +191,14 @@ export default function AnalysisPage() {
             )}
 
             {/* View Mode Switcher */}
-            <div className="flex items-center p-1 bg-slate-900 border border-slate-800 rounded-xl text-xs font-mono">
+            <div className="flex items-center p-1 bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl text-xs font-mono">
               <button
                 type="button"
                 onClick={() => setViewMode('report')}
                 className={`px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1.5 ${
                   viewMode === 'report'
-                    ? 'bg-cyan-500/20 text-cyan-300 font-bold border border-cyan-500/30'
-                    : 'text-slate-400 hover:text-slate-200'
+                    ? 'bg-white dark:bg-blue-500/20 text-blue-600 dark:text-blue-300 font-bold border border-blue-200 dark:border-blue-500/30 shadow-sm'
+                    : 'text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'
                 }`}
               >
                 <Sparkles className="w-3.5 h-3.5" />
@@ -198,8 +210,8 @@ export default function AnalysisPage() {
                 onClick={() => setViewMode('viewer')}
                 className={`px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1.5 ${
                   viewMode === 'viewer'
-                    ? 'bg-cyan-500/20 text-cyan-300 font-bold border border-cyan-500/30'
-                    : 'text-slate-400 hover:text-slate-200'
+                    ? 'bg-white dark:bg-blue-500/20 text-blue-600 dark:text-blue-300 font-bold border border-blue-200 dark:border-blue-500/30 shadow-sm'
+                    : 'text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'
                 }`}
               >
                 <Layout className="w-3.5 h-3.5" />
@@ -224,7 +236,7 @@ export default function AnalysisPage() {
             <button
               type="button"
               onClick={handleExport}
-              className="btn btn-primary btn-sm shadow-lg shadow-cyan-500/20"
+              className="btn btn-primary btn-sm"
             >
               <Download className="w-3.5 h-3.5" />
               <span>Export Audit</span>
@@ -235,20 +247,20 @@ export default function AnalysisPage() {
 
       {/* NO DOCUMENTS IN REPOSITORY */}
       {!isLoadingDocs && rawDocs.length === 0 && !selectedDocId && (
-        <div className="card-base p-10 text-center space-y-4 border-slate-800 my-8">
-          <div className="w-14 h-14 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 flex items-center justify-center mx-auto">
+        <div className="card-base p-10 text-center space-y-4 my-8">
+          <div className="w-14 h-14 rounded-2xl bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/30 text-blue-600 dark:text-blue-400 flex items-center justify-center mx-auto">
             <FileText className="w-7 h-7" />
           </div>
           <div className="space-y-1 max-w-md mx-auto">
-            <h3 className="text-base font-bold text-slate-100">No Documents Uploaded</h3>
-            <p className="text-xs text-slate-400 leading-relaxed">
+            <h3 className="text-base font-bold text-slate-900 dark:text-slate-100">No Documents Uploaded</h3>
+            <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
               Upload a commercial document to execute evidence-backed AI risk scoring.
             </p>
           </div>
           <button
             type="button"
             onClick={openUploadModal}
-            className="btn btn-primary btn-sm mx-auto shadow-lg shadow-cyan-500/20"
+            className="btn btn-primary btn-sm mx-auto"
           >
             <UploadCloud className="w-4 h-4" />
             <span>Upload Document</span>
@@ -258,13 +270,13 @@ export default function AnalysisPage() {
 
       {/* CONTROLLED ERROR STATE */}
       {isAnalysisError && (
-        <div className="card-base p-8 text-center space-y-4 border-rose-900/40 bg-rose-950/20 my-6">
-          <div className="w-12 h-12 rounded-full bg-rose-500/10 border border-rose-500/30 text-rose-400 flex items-center justify-center mx-auto">
+        <div className="card-base p-8 text-center space-y-4 border-rose-200 dark:border-rose-900/40 bg-rose-50 dark:bg-rose-950/20 my-6">
+          <div className="w-12 h-12 rounded-full bg-rose-100 dark:bg-rose-500/10 border border-rose-200 dark:border-rose-500/30 text-rose-600 dark:text-rose-400 flex items-center justify-center mx-auto">
             <AlertCircle className="w-6 h-6" />
           </div>
           <div className="space-y-1">
-            <h3 className="text-base font-bold text-rose-200">Analysis unavailable. Please retry.</h3>
-            <p className="text-xs text-slate-400">
+            <h3 className="text-base font-bold text-rose-700 dark:text-rose-200">Analysis unavailable. Please retry.</h3>
+            <p className="text-xs text-slate-500 dark:text-slate-400">
               The server could not retrieve or complete evidence extraction for this document.
             </p>
           </div>
@@ -311,6 +323,20 @@ export default function AnalysisPage() {
             evidenceList={reportData.evidenceList}
           />
 
+          {/* Action Roadmap & Playbook Card (DO, DO NOT, REMEMBER, NEXT STEPS) */}
+          <ContractActionRoadmapCard
+            roadmapData={roadmapResponse}
+            isLoading={isLoadingRoadmap}
+            documentTitle={reportData.documentName}
+            onOpenSourceQuote={(item) => setSourceDrawerState({ isOpen: true, item })}
+          />
+
+          {/* Interactive Visual Contract Risk Pathway Diagram */}
+          <ContractVisualDiagram />
+
+          {/* Extracted Key Legal Terms, Statutory Acts & Plain-English Glossary */}
+          <LegalGlossaryCard onOpenSourceQuote={(item) => setSourceDrawerState({ isOpen: true, item })} />
+
           {/* Actionable Strategy Recommendations */}
           <StrategyRecommendationsCard
             importantDates={[]}
@@ -321,7 +347,7 @@ export default function AnalysisPage() {
 
       {/* DOCUMENT VIEWER MODE */}
       {viewMode === 'viewer' && !isLoadingAnalysis && (
-        <div className="h-[calc(100vh-12rem)] flex flex-col overflow-hidden bg-background rounded-2xl border border-slate-800 animate-in fade-in duration-200">
+        <div className="h-[calc(100vh-12rem)] flex flex-col overflow-hidden bg-background rounded-2xl border border-slate-200 dark:border-slate-800 animate-in fade-in duration-200">
           <AnalysisToolbar
             documentTitle={documentData.title}
             currentPage={currentPage}
@@ -389,6 +415,13 @@ export default function AnalysisPage() {
           </div>
         </div>
       )}
+
+      {/* Source Evidence Inspection Drawer */}
+      <SourceEvidenceDrawer
+        isOpen={sourceDrawerState.isOpen}
+        item={sourceDrawerState.item}
+        onClose={() => setSourceDrawerState({ isOpen: false, item: null })}
+      />
     </div>
   );
 }

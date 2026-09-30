@@ -170,49 +170,49 @@ export default function ActivityPage() {
 
       {/* Metric Cards Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="card-base p-4 border-slate-800 bg-[#0b1021]/90 flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 shrink-0">
+        <div className="card-base p-4 flex items-center gap-3">
+          <div className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-cyan-500/10 border border-blue-200 dark:border-cyan-500/30 flex items-center justify-center text-blue-600 dark:text-cyan-400 shrink-0">
             <Activity className="w-5 h-5" />
           </div>
           <div>
-            <div className="text-xl font-bold text-slate-100 font-mono">{mockAuditStats.totalEvents}</div>
-            <div className="text-xs text-slate-400">Total Audit Events</div>
+            <div className="text-xl font-bold text-slate-900 dark:text-slate-100 font-mono">{mockAuditStats.totalEvents}</div>
+            <div className="text-xs text-slate-500 dark:text-slate-400">Total Audit Events</div>
           </div>
         </div>
 
-        <div className="card-base p-4 border-slate-800 bg-[#0b1021]/90 flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-indigo-500/10 border border-indigo-500/30 flex items-center justify-center text-indigo-400 shrink-0">
+        <div className="card-base p-4 flex items-center gap-3">
+          <div className="w-10 h-10 rounded-xl bg-indigo-50 dark:bg-indigo-500/10 border border-indigo-200 dark:border-indigo-500/30 flex items-center justify-center text-indigo-600 dark:text-indigo-400 shrink-0">
             <Sparkles className="w-5 h-5" />
           </div>
           <div>
-            <div className="text-xl font-bold text-slate-100 font-mono">{mockAuditStats.extractions}</div>
-            <div className="text-xs text-slate-400">AI Clause Extractions</div>
+            <div className="text-xl font-bold text-slate-900 dark:text-slate-100 font-mono">{mockAuditStats.extractions}</div>
+            <div className="text-xs text-slate-500 dark:text-slate-400">AI Clause Extractions</div>
           </div>
         </div>
 
-        <div className="card-base p-4 border-slate-800 bg-[#0b1021]/90 flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 shrink-0">
+        <div className="card-base p-4 flex items-center gap-3">
+          <div className="w-10 h-10 rounded-xl bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/30 flex items-center justify-center text-amber-600 dark:text-amber-400 shrink-0">
             <Database className="w-5 h-5" />
           </div>
           <div>
-            <div className="text-xl font-bold text-slate-100 font-mono">{mockAuditStats.dataExports}</div>
-            <div className="text-xs text-slate-400">Data Archive Exports</div>
+            <div className="text-xl font-bold text-slate-900 dark:text-slate-100 font-mono">{mockAuditStats.dataExports}</div>
+            <div className="text-xs text-slate-500 dark:text-slate-400">Data Archive Exports</div>
           </div>
         </div>
 
-        <div className="card-base p-4 border-slate-800 bg-[#0b1021]/90 flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 shrink-0">
+        <div className="card-base p-4 flex items-center gap-3">
+          <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/30 flex items-center justify-center text-emerald-600 dark:text-emerald-400 shrink-0">
             <Lock className="w-5 h-5" />
           </div>
           <div>
-            <div className="text-xs font-bold text-emerald-400 font-mono">SOC 2 Type II</div>
-            <div className="text-xs text-slate-400">Immutable SHA-256 Trail</div>
+            <div className="text-xs font-bold text-emerald-600 dark:text-emerald-400 font-mono">SOC 2 Type II</div>
+            <div className="text-xs text-slate-500 dark:text-slate-400">Immutable SHA-256 Trail</div>
           </div>
         </div>
       </div>
 
       {/* Audit Stream Main Card */}
-      <div className="card-base p-6 border-slate-800 space-y-5 bg-[#0b1021]/90">
+      <div className="card-base p-6 space-y-5">
         {/* Controls Bar: Search, Category, Status, Refresh, Export CSV */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-4">
           {/* Search Field */}
@@ -300,10 +300,10 @@ export default function ActivityPage() {
         </div>
 
         {/* Audit Logs Table */}
-        <div className="overflow-x-auto rounded-xl border border-slate-800 bg-slate-950/40">
+        <div className="overflow-x-auto rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950/40">
           <table className="w-full text-left text-xs border-collapse">
             <thead>
-              <tr className="border-b border-slate-800 bg-slate-900/80 text-slate-400 font-mono text-[11px] uppercase tracking-wider">
+              <tr className="border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/80 text-slate-500 dark:text-slate-400 font-mono text-[11px] uppercase tracking-wider">
                 <th className="p-3.5">Event ID & Time</th>
                 <th className="p-3.5">Action & Category</th>
                 <th className="p-3.5">Resource / Target</th>
@@ -312,7 +312,7 @@ export default function ActivityPage() {
                 <th className="p-3.5 text-right">Details</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-800/80">
+            <tbody className="divide-y divide-slate-200 dark:divide-slate-800/80">
               {filteredLogs.length === 0 ? (
                 <tr>
                   <td colSpan="6" className="p-8 text-center text-slate-400">
@@ -327,32 +327,32 @@ export default function ActivityPage() {
                     <React.Fragment key={log.id}>
                       <tr
                         onClick={() => setExpandedId(isExpanded ? null : log.id)}
-                        className="hover:bg-slate-900/60 transition-colors cursor-pointer"
+                        className="hover:bg-slate-50 dark:hover:bg-slate-900/60 transition-colors cursor-pointer"
                       >
                         {/* Event ID & Timestamp */}
                         <td className="p-3.5">
-                          <div className="font-mono font-semibold text-slate-200">{log.id}</div>
-                          <div className="text-[11px] text-slate-400 font-mono">{log.timestamp}</div>
+                          <div className="font-mono font-semibold text-slate-800 dark:text-slate-200">{log.id}</div>
+                          <div className="text-[11px] text-slate-500 dark:text-slate-400 font-mono">{log.timestamp}</div>
                         </td>
 
                         {/* Action & Category */}
                         <td className="p-3.5">
-                          <div className="flex items-center gap-1.5 font-semibold text-slate-200">
+                          <div className="flex items-center gap-1.5 font-semibold text-slate-800 dark:text-slate-200">
                             {getCategoryIcon(log.category)}
                             <span>{log.action}</span>
                           </div>
-                          <div className="text-[11px] text-slate-400 capitalize">{log.category.replace('_', ' ')}</div>
+                          <div className="text-[11px] text-slate-500 dark:text-slate-400 capitalize">{log.category.replace('_', ' ')}</div>
                         </td>
 
                         {/* Resource */}
                         <td className="p-3.5">
-                          <div className="text-slate-200 max-w-xs truncate font-mono text-[11px]">{log.resource}</div>
+                          <div className="text-slate-700 dark:text-slate-200 max-w-xs truncate font-mono text-[11px]">{log.resource}</div>
                         </td>
 
                         {/* User / Principal */}
                         <td className="p-3.5">
-                          <div className="text-slate-200 font-medium">{log.user}</div>
-                          <div className="text-[11px] text-slate-400 font-mono">{log.role}</div>
+                          <div className="text-slate-700 dark:text-slate-200 font-medium">{log.user}</div>
+                          <div className="text-[11px] text-slate-500 dark:text-slate-400 font-mono">{log.role}</div>
                         </td>
 
                         {/* Status Badge */}
@@ -362,7 +362,7 @@ export default function ActivityPage() {
                         <td className="p-3.5 text-right">
                           <button
                             type="button"
-                            className="p-1 rounded-lg text-slate-400 hover:text-slate-200 hover:bg-slate-800"
+                            className="p-1 rounded-lg text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800"
                             aria-label="Toggle details"
                           >
                             {isExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
@@ -372,25 +372,25 @@ export default function ActivityPage() {
 
                       {/* Expanded Details Drawer */}
                       {isExpanded && (
-                        <tr className="bg-slate-950/80 border-b border-slate-800">
+                        <tr className="bg-slate-50 dark:bg-slate-950/80 border-b border-slate-200 dark:border-slate-800">
                           <td colSpan="6" className="p-4 space-y-3">
-                            <div className="text-xs text-slate-300 font-sans">
-                              <span className="font-bold text-slate-200">Description: </span>
+                            <div className="text-xs text-slate-600 dark:text-slate-300 font-sans">
+                              <span className="font-bold text-slate-700 dark:text-slate-200">Description: </span>
                               {log.details}
                             </div>
 
-                            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-[11px] font-mono p-3 rounded-lg bg-slate-900 border border-slate-800">
+                            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-[11px] font-mono p-3 rounded-lg bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
                               <div>
-                                <span className="text-slate-500">IP Address: </span>
-                                <span className="text-cyan-300">{log.ip}</span>
+                                <span className="text-slate-400 dark:text-slate-500">IP Address: </span>
+                                <span className="text-blue-600 dark:text-blue-300">{log.ip}</span>
                               </div>
                               <div>
-                                <span className="text-slate-500">User Email: </span>
-                                <span className="text-slate-300">{log.email}</span>
+                                <span className="text-slate-400 dark:text-slate-500">User Email: </span>
+                                <span className="text-slate-700 dark:text-slate-300">{log.email}</span>
                               </div>
                               <div>
-                                <span className="text-slate-500">Ledger Hash: </span>
-                                <span className="text-emerald-400">SHA256-VERIFIED</span>
+                                <span className="text-slate-400 dark:text-slate-500">Ledger Hash: </span>
+                                <span className="text-emerald-600 dark:text-emerald-400">SHA256-VERIFIED</span>
                               </div>
                             </div>
 
@@ -400,7 +400,7 @@ export default function ActivityPage() {
                                 <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider">
                                   Event Metadata Payload (JSON)
                                 </span>
-                                <pre className="p-3 rounded-lg bg-slate-900/90 border border-slate-800 text-[11px] font-mono text-cyan-300 overflow-x-auto">
+                                <pre className="p-3 rounded-lg bg-slate-50 dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 text-[11px] font-mono text-blue-700 dark:text-blue-300 overflow-x-auto">
                                   {JSON.stringify(log.payload, null, 2)}
                                 </pre>
                               </div>

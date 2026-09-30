@@ -55,13 +55,13 @@ export default function ResetPasswordPage() {
   };
 
   return (
-    <div className="card-elevated p-6 sm:p-8 space-y-6 bg-[#0b1021]/90 border-slate-800 shadow-2xl">
+    <div className="card-elevated p-6 sm:p-8 space-y-6 shadow-xl">
       {/* Header */}
       <div className="space-y-1 text-center sm:text-left">
-        <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-100">
+        <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-100">
           Set New Password
         </h2>
-        <p className="text-xs text-slate-400">
+        <p className="text-xs text-slate-500 dark:text-slate-400">
           Create a new strong password for your LegalMind AI account.
         </p>
       </div>
@@ -72,7 +72,7 @@ export default function ResetPasswordPage() {
             <CheckCircle2 className="w-6 h-6" />
           </div>
           <div className="space-y-1">
-            <h3 className="text-base font-bold text-slate-100">Password Updated</h3>
+            <h3 className="text-base font-bold text-slate-900 dark:text-slate-100">Password Updated</h3>
             <p className="text-xs text-slate-400 max-w-xs mx-auto leading-relaxed">
               Your password has been successfully reset. Redirecting to sign in...
             </p>

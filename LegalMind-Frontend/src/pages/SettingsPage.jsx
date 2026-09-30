@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import PageHeader from '../components/layout/PageHeader';
 import StatusIndicator from '../components/brand/StatusIndicator';
 import AccountSettingsTab from '../components/settings/AccountSettingsTab';
@@ -14,14 +15,36 @@ import {
   Bell,
   Database,
   CheckCircle2,
+  Menu,
+  ChevronLeft,
+  ChevronRight,
+  ArrowLeft,
+  Sparkles,
 } from 'lucide-react';
 
 import { triggerDataArchiveDownload } from '../utils/archiveUtils';
 
+const SETTINGS_TABS = [
+  { id: 'account', label: 'Account Profile', icon: User },
+  { id: 'security', label: 'Security & Sessions', icon: ShieldCheck },
+  { id: 'appearance', label: 'Appearance', icon: Moon },
+  { id: 'notifications', label: 'Notifications', icon: Bell },
+  { id: 'privacy', label: 'Privacy & Data', icon: Database },
+];
+
 export default function SettingsPage() {
-  const [activeTab, setActiveTab] = useState('account'); // 'account' | 'security' | 'appearance' | 'notifications' | 'privacy'
+  const [searchParams, setSearchParams] = useSearchParams();
+  const urlTab = searchParams.get('tab');
+  const validTabs = ['account', 'security', 'appearance', 'notifications', 'privacy'];
+  const activeTab = urlTab && validTabs.includes(urlTab) ? urlTab : 'account';
+
+  const setActiveTab = (tabKey) => {
+    setSearchParams({ tab: tabKey });
+  };
+
   const [toastMsg, setToastMsg] = useState(null);
   const [modalState, setModalState] = useState({ isOpen: false, type: 'deleteAccount' });
+  const [isFeatureBundleOpen, setIsFeatureBundleOpen] = useState(false);
 
   const showToast = (msg) => {
     setToastMsg(msg);
@@ -64,72 +87,105 @@ export default function SettingsPage() {
         badge={<StatusIndicator status="secure" label="Security Verified" />}
       />
 
-      {/* Settings Navigation Tabs Bar */}
-      <div className="flex items-center gap-2 border-b border-slate-800 bg-[#070b18] p-1.5 rounded-2xl border overflow-x-auto text-xs font-mono">
-        <button
-          type="button"
-          onClick={() => setActiveTab('account')}
-          className={`px-4 py-2 rounded-xl transition-colors flex items-center gap-2 whitespace-nowrap ${
-            activeTab === 'account'
-              ? 'bg-cyan-500/20 text-cyan-300 font-bold border border-cyan-500/30'
-              : 'text-slate-400 hover:text-slate-200'
-          }`}
-        >
-          <User className="w-3.5 h-3.5" />
-          <span>Account Profile</span>
-        </button>
+      {/* Settings Navigation Tabs Container & Light Green 3-Line Menu Bundle */}
+      <div className="relative border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#070b18] p-2 rounded-2xl">
+        <div className="flex items-center justify-between gap-3">
+          {/* Active Tab Badge Indicator (Horizontal Tab Bar Removed as requested) */}
+          <div className="flex items-center gap-2 text-xs font-mono px-2 py-1">
+            {(() => {
+              const currentTabObj = SETTINGS_TABS.find((t) => t.id === activeTab) || SETTINGS_TABS[0];
+              const CurrentIcon = currentTabObj.icon;
+              return (
+                <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-blue-500/10 border border-blue-500/30 text-blue-600 dark:text-cyan-400 font-bold">
+                  <CurrentIcon className="w-4 h-4" />
+                  <span>{currentTabObj.label}</span>
+                </div>
+              );
+            })()}
+          </div>
 
-        <button
-          type="button"
-          onClick={() => setActiveTab('security')}
-          className={`px-4 py-2 rounded-xl transition-colors flex items-center gap-2 whitespace-nowrap ${
-            activeTab === 'security'
-              ? 'bg-cyan-500/20 text-cyan-300 font-bold border border-cyan-500/30'
-              : 'text-slate-400 hover:text-slate-200'
-          }`}
-        >
-          <ShieldCheck className="w-3.5 h-3.5" />
-          <span>Security & Sessions</span>
-        </button>
+          {/* Right-Side Light Green 3-Line Menu Button with Glow & Effect */}
+          <button
+            type="button"
+            onClick={() => setIsFeatureBundleOpen(!isFeatureBundleOpen)}
+            className={`
+              flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-mono font-bold transition-all duration-300 shrink-0
+              border shadow-lg relative z-20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500
+              ${
+                isFeatureBundleOpen
+                  ? 'bg-emerald-500 text-slate-950 border-emerald-400 shadow-[0_0_20px_rgba(16,185,129,0.6)] scale-105'
+                  : 'bg-emerald-500/15 hover:bg-emerald-500/25 border-emerald-500/40 text-emerald-600 dark:text-emerald-400 shadow-[0_0_15px_rgba(16,185,129,0.3)] hover:shadow-[0_0_25px_rgba(16,185,129,0.5)] hover:scale-105 active:scale-95'
+              }
+            `}
+            title={isFeatureBundleOpen ? "Collapse 5 Features Menu" : "Expand 5 Features Menu"}
+          >
+            {isFeatureBundleOpen ? (
+              <>
+                <ChevronRight className="w-4 h-4 text-slate-950 stroke-[3] animate-pulse" />
+                <span className="hidden sm:inline">Close</span>
+              </>
+            ) : (
+              <>
+                <div className="flex flex-col justify-between w-4 h-3.5 py-0.5">
+                  <span className="w-full h-0.5 bg-emerald-500 dark:bg-emerald-400 rounded-full animate-pulse"></span>
+                  <span className="w-full h-0.5 bg-emerald-400 dark:bg-emerald-300 rounded-full"></span>
+                  <span className="w-full h-0.5 bg-emerald-500 dark:bg-emerald-400 rounded-full animate-pulse"></span>
+                </div>
+                <span className="hidden sm:inline">5 Features</span>
+                <ChevronLeft className="w-3.5 h-3.5 text-emerald-500 dark:text-emerald-400 animate-bounce-x" />
+              </>
+            )}
+          </button>
+        </div>
 
-        <button
-          type="button"
-          onClick={() => setActiveTab('appearance')}
-          className={`px-4 py-2 rounded-xl transition-colors flex items-center gap-2 whitespace-nowrap ${
-            activeTab === 'appearance'
-              ? 'bg-cyan-500/20 text-cyan-300 font-bold border border-cyan-500/30'
-              : 'text-slate-400 hover:text-slate-200'
-          }`}
-        >
-          <Moon className="w-3.5 h-3.5" />
-          <span>Appearance</span>
-        </button>
+        {/* Animated Right-to-Left Slide Drawer for 5 Feature Bundle */}
+        {isFeatureBundleOpen && (
+          <div className="mt-3 pt-3 border-t border-slate-200 dark:border-slate-800 animate-in slide-in-from-right duration-300 ease-out">
+            <div className="flex items-center justify-between px-2 pb-2">
+              <span className="text-[10px] font-mono font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-widest flex items-center gap-1.5">
+                <Sparkles className="w-3.5 h-3.5 text-emerald-500" />
+                <span>5 Bundled Feature Shortcuts</span>
+              </span>
+              <button
+                type="button"
+                onClick={() => setIsFeatureBundleOpen(false)}
+                className="text-xs text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 flex items-center gap-1 font-mono"
+              >
+                <ArrowLeft className="w-3.5 h-3.5" /> Close Panel
+              </button>
+            </div>
 
-        <button
-          type="button"
-          onClick={() => setActiveTab('notifications')}
-          className={`px-4 py-2 rounded-xl transition-colors flex items-center gap-2 whitespace-nowrap ${
-            activeTab === 'notifications'
-              ? 'bg-cyan-500/20 text-cyan-300 font-bold border border-cyan-500/30'
-              : 'text-slate-400 hover:text-slate-200'
-          }`}
-        >
-          <Bell className="w-3.5 h-3.5" />
-          <span>Notifications</span>
-        </button>
-
-        <button
-          type="button"
-          onClick={() => setActiveTab('privacy')}
-          className={`px-4 py-2 rounded-xl transition-colors flex items-center gap-2 whitespace-nowrap ${
-            activeTab === 'privacy'
-              ? 'bg-cyan-500/20 text-cyan-300 font-bold border border-cyan-500/30'
-              : 'text-slate-400 hover:text-slate-200'
-          }`}
-        >
-          <Database className="w-3.5 h-3.5" />
-          <span>Privacy & Data</span>
-        </button>
+            <div className="grid grid-cols-1 sm:grid-cols-5 gap-2 text-xs font-mono">
+              {SETTINGS_TABS.map((tab) => {
+                const TabIcon = tab.icon;
+                const isActive = activeTab === tab.id;
+                return (
+                  <button
+                    key={`bundle-${tab.id}`}
+                    type="button"
+                    onClick={() => {
+                      setActiveTab(tab.id);
+                      setIsFeatureBundleOpen(false);
+                    }}
+                    className={`p-3 rounded-xl border text-left transition-all duration-200 flex flex-col justify-between gap-2 group ${
+                      isActive
+                        ? 'bg-gradient-to-br from-emerald-500/20 to-blue-500/20 border-emerald-500/60 text-slate-900 dark:text-slate-100 font-bold shadow-md shadow-emerald-500/10'
+                        : 'bg-white dark:bg-[#0a0f24] border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:border-emerald-500/40 hover:text-emerald-600 dark:hover:text-emerald-300 hover:bg-emerald-500/5'
+                    }`}
+                  >
+                    <div className="flex items-center justify-between w-full">
+                      <div className={`p-1.5 rounded-lg ${isActive ? 'bg-emerald-500 text-slate-950' : 'bg-slate-100 dark:bg-slate-800 text-slate-500 group-hover:text-emerald-500'}`}>
+                        <TabIcon className="w-4 h-4" />
+                      </div>
+                      {isActive && <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />}
+                    </div>
+                    <span className="text-xs truncate">{tab.label}</span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Active Tab Panel Render */}

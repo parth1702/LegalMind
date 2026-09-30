@@ -24,17 +24,17 @@ export default function LogoMark({ size = 'md', className = '', animated = false
         viewBox="0 0 64 64"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="w-full h-full drop-shadow-[0_0_12px_rgba(34,211,238,0.25)]"
+        className="w-full h-full"
       >
         <defs>
           <linearGradient id="shieldGradient" x1="8" y1="8" x2="56" y2="56" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stopColor="#22d3ee" />
-            <stop offset="50%" stopColor="#06b6d4" />
-            <stop offset="100%" stopColor="#6366f1" />
+            <stop offset="0%" stopColor="#2563eb" />
+            <stop offset="50%" stopColor="#1d4ed8" />
+            <stop offset="100%" stopColor="#3b82f6" />
           </linearGradient>
           <linearGradient id="coreGradient" x1="22" y1="22" x2="42" y2="42" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stopColor="#67e8f9" />
-            <stop offset="100%" stopColor="#3b82f6" />
+            <stop offset="0%" stopColor="#60a5fa" />
+            <stop offset="100%" stopColor="#2563eb" />
           </linearGradient>
         </defs>
 
@@ -45,8 +45,8 @@ export default function LogoMark({ size = 'md', className = '', animated = false
           strokeWidth="3.5"
           strokeLinecap="round"
           strokeLinejoin="round"
-          fill="#050814"
-          fillOpacity="0.85"
+          fill="#ffffff"
+          fillOpacity="0.95"
         />
 
         {/* Inner Document Alignment Box */}
@@ -56,7 +56,7 @@ export default function LogoMark({ size = 'md', className = '', animated = false
           width="20"
           height="20"
           rx="3"
-          stroke="#22d3ee"
+          stroke="#2563eb"
           strokeWidth="1.5"
           strokeDasharray="3 2"
           opacity="0.7"
@@ -73,10 +73,10 @@ export default function LogoMark({ size = 'md', className = '', animated = false
         <circle cx="32" cy="32" r="2.5" fill="#ffffff" />
 
         {/* Connecting Data Rays */}
-        <line x1="32" y1="16" x2="32" y2="22" stroke="#22d3ee" strokeWidth="2" strokeLinecap="round" />
-        <line x1="32" y1="42" x2="32" y2="48" stroke="#6366f1" strokeWidth="2" strokeLinecap="round" />
-        <line x1="16" y1="32" x2="22" y2="32" stroke="#22d3ee" strokeWidth="2" strokeLinecap="round" />
-        <line x1="42" y1="32" x2="48" y2="32" stroke="#6366f1" strokeWidth="2" strokeLinecap="round" />
+        <line x1="32" y1="16" x2="32" y2="22" stroke="#2563eb" strokeWidth="2" strokeLinecap="round" />
+        <line x1="32" y1="42" x2="32" y2="48" stroke="#1d4ed8" strokeWidth="2" strokeLinecap="round" />
+        <line x1="16" y1="32" x2="22" y2="32" stroke="#2563eb" strokeWidth="2" strokeLinecap="round" />
+        <line x1="42" y1="32" x2="48" y2="32" stroke="#1d4ed8" strokeWidth="2" strokeLinecap="round" />
       </svg>
     </div>
   );

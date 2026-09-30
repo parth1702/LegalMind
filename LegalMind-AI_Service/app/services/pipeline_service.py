@@ -16,6 +16,7 @@ Includes status tracking, execution metrics, and sanitized error boundaries.
 from __future__ import annotations
 
 import time
+from typing import Optional
 from app.core.logging import get_logger
 from app.schemas.document import DocumentExtractionResponse
 from app.schemas.analysis import (

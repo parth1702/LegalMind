@@ -77,16 +77,16 @@ export default function VerifyPage() {
   };
 
   return (
-    <div className="card-elevated p-6 sm:p-8 space-y-6 bg-[#0b1021]/90 border-slate-800 shadow-2xl">
+    <div className="card-elevated p-6 sm:p-8 space-y-6 shadow-xl">
       {/* Header */}
       <div className="space-y-1 text-center sm:text-left">
-        <div className="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 mb-3 mx-auto sm:mx-0">
+        <div className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/30 flex items-center justify-center text-blue-600 dark:text-blue-400 mb-3 mx-auto sm:mx-0">
           <ShieldCheck className="w-5 h-5" />
         </div>
-        <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-100">
+        <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-100">
           Verify Your Email
         </h2>
-        <p className="text-xs text-slate-400">
+        <p className="text-xs text-slate-500 dark:text-slate-400">
           Enter the 6-digit security code sent to your registered email address.
         </p>
       </div>
@@ -97,7 +97,7 @@ export default function VerifyPage() {
             <CheckCircle2 className="w-6 h-6" />
           </div>
           <div className="space-y-1">
-            <h3 className="text-base font-bold text-slate-100">Email Verified</h3>
+            <h3 className="text-base font-bold text-slate-900 dark:text-slate-100">Email Verified</h3>
             <p className="text-xs text-slate-400 max-w-xs mx-auto leading-relaxed">
               Your security verification is complete. Redirecting to workspace...
             </p>
@@ -106,7 +106,7 @@ export default function VerifyPage() {
       ) : (
         <form onSubmit={handleVerify} className="space-y-6">
           {errorMsg && (
-            <p className="text-xs text-rose-400 font-mono text-center bg-rose-950/40 p-2 rounded border border-rose-900/40">
+            <p className="text-xs text-rose-600 dark:text-rose-400 font-mono text-center bg-rose-50 dark:bg-rose-950/40 p-2 rounded border border-rose-200 dark:border-rose-900/40">
               {errorMsg}
             </p>
           )}
@@ -123,7 +123,7 @@ export default function VerifyPage() {
                 value={digit}
                 onChange={(e) => handleChange(idx, e.target.value)}
                 onKeyDown={(e) => handleKeyDown(idx, e)}
-                className="w-10 sm:w-12 h-12 text-center text-lg font-bold font-mono bg-[#050814] border border-slate-800 text-cyan-300 rounded-xl focus:outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-500/50"
+                className="w-10 sm:w-12 h-12 text-center text-lg font-bold font-mono bg-white dark:bg-[#050814] border border-slate-300 dark:border-slate-800 text-slate-900 dark:text-blue-300 rounded-xl focus:outline-none focus:border-blue-500 dark:focus:border-blue-400 focus:ring-2 focus:ring-blue-500/30"
                 disabled={isLoading}
               />
             ))}
@@ -133,7 +133,7 @@ export default function VerifyPage() {
           <button
             type="submit"
             disabled={isLoading}
-            className="btn btn-primary btn-md w-full justify-center shadow-lg shadow-cyan-500/20"
+            className="btn btn-primary btn-md w-full justify-center"
           >
             {isLoading ? (
               <>
@@ -152,16 +152,16 @@ export default function VerifyPage() {
 
       {/* Resend Code Section */}
       {!isVerified && (
-        <div className="text-center pt-2 border-t border-slate-800/80">
+        <div className="text-center pt-2 border-t border-slate-200 dark:border-slate-800/80">
           {resendTimer > 0 ? (
             <p className="text-xs font-mono text-slate-500">
-              Resend code available in <span className="text-cyan-400 font-semibold">{resendTimer}s</span>
+              Resend code available in <span className="text-blue-600 dark:text-blue-400 font-semibold">{resendTimer}s</span>
             </p>
           ) : (
             <button
               type="button"
               onClick={handleResend}
-              className="inline-flex items-center gap-1.5 text-xs text-cyan-400 hover:text-cyan-300 transition-colors font-medium"
+              className="inline-flex items-center gap-1.5 text-xs text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors font-medium"
             >
               <RefreshCw className="w-3.5 h-3.5" />
               <span>Resend Verification Code</span>

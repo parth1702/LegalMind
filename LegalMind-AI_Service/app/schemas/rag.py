@@ -63,6 +63,9 @@ class RAGQueryRequest(BaseModel):
     document_id: Optional[str] = Field(None, description="Scope query to specific document ID")
     top_k: int = Field(4, ge=1, le=10, description="Number of top context passages to retrieve")
     min_score: float = Field(0.20, ge=0.0, le=1.0, description="Minimum relevance threshold score")
+    conversation_history: Optional[List[Dict[str, Any]]] = Field(
+        None, description="Previous conversation turns for multi-turn context [{role, content}]"
+    )
 
 
 class RAGQueryResponse(BaseModel):

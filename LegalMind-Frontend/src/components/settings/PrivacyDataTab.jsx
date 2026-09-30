@@ -46,11 +46,11 @@ export default function PrivacyDataTab({ onShowToast, onOpenConfirmModal }) {
   return (
     <div className="space-y-6">
       {/* Privacy & Governance Card */}
-      <div className="card-base p-6 border-slate-800 space-y-4 bg-[#0b1021]/90">
-        <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+      <div className="card-base p-6 space-y-4">
+        <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3">
           <div className="flex items-center gap-2">
-            <ShieldCheck className="w-5 h-5 text-emerald-400" />
-            <h3 className="text-sm font-bold text-slate-100 uppercase tracking-wider font-mono">
+            <ShieldCheck className="w-5 h-5 text-emerald-500 dark:text-emerald-400" />
+            <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 uppercase tracking-wider font-mono">
               Privacy & Institutional Data Governance
             </h3>
           </div>
@@ -58,13 +58,13 @@ export default function PrivacyDataTab({ onShowToast, onOpenConfirmModal }) {
         </div>
 
         {/* Zero LLM Training Toggle */}
-        <div className="p-4 rounded-xl bg-slate-900/80 border border-slate-800 space-y-3">
+        <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 space-y-3">
           <div className="flex items-center justify-between">
             <div className="space-y-0.5 max-w-lg">
-              <span className="text-xs font-bold text-slate-100 flex items-center gap-1.5">
-                <Lock className="w-3.5 h-3.5 text-cyan-400" /> Zero Foundation Model Training Guarantee
+              <span className="text-xs font-bold text-slate-900 dark:text-slate-100 flex items-center gap-1.5">
+                <Lock className="w-3.5 h-3.5 text-blue-500 dark:text-blue-400" /> Zero Foundation Model Training Guarantee
               </span>
-              <p className="text-xs text-slate-400 leading-relaxed">
+              <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
                 Guarantees that Acme Corporation's contract text and extracted metadata are strictly isolated and never utilized for global AI model training.
               </p>
             </div>
@@ -75,14 +75,14 @@ export default function PrivacyDataTab({ onShowToast, onOpenConfirmModal }) {
                 setZeroLlmTraining(e.target.checked);
                 onShowToast(`Zero LLM Training Guarantee ${e.target.checked ? 'enforced' : 'modified'}.`);
               }}
-              className="w-4 h-4 rounded border-slate-700 bg-slate-900 text-cyan-500 focus:ring-cyan-400 shrink-0"
+              className="w-4 h-4 rounded border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 text-blue-600 focus:ring-blue-500 shrink-0"
             />
           </div>
         </div>
 
         {/* Data Archival & Retention */}
         <div className="space-y-2 pt-2">
-          <label className="block text-xs font-medium text-slate-300">Automated Compliance Archival</label>
+          <label className="block text-xs font-medium text-slate-600 dark:text-slate-300">Automated Compliance Archival</label>
           <select
             value={autoArchiveDays}
             onChange={(e) => {
@@ -100,18 +100,18 @@ export default function PrivacyDataTab({ onShowToast, onOpenConfirmModal }) {
       </div>
 
       {/* Data Export & Backup */}
-      <div className="card-base p-6 border-slate-800 space-y-4 bg-[#0b1021]/90">
-        <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+      <div className="card-base p-6 space-y-4">
+        <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3">
           <div className="flex items-center gap-2">
-            <Database className="w-5 h-5 text-cyan-400" />
-            <h3 className="text-sm font-bold text-slate-100 uppercase tracking-wider font-mono">
+            <Database className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+            <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 uppercase tracking-wider font-mono">
               Export Enterprise Data Archive
             </h3>
           </div>
           <span className="badge badge-ai text-[10px]">PC File Download Ready</span>
         </div>
 
-        <p className="text-xs text-slate-300 leading-relaxed">
+        <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
           Export a complete encrypted ZIP/JSON package containing all raw PDFs, extracted clause metadata, risk matrix logs, and conversation history directly to your local PC.
         </p>
 
@@ -119,7 +119,7 @@ export default function PrivacyDataTab({ onShowToast, onOpenConfirmModal }) {
           <button
             type="button"
             onClick={handleExportPdf}
-            className="btn btn-primary btn-md bg-rose-600 hover:bg-rose-500 text-white shadow-lg shadow-rose-950/40"
+            className="btn btn-danger btn-md"
           >
             <FileText className="w-4 h-4" />
             <span>Download PDF Report (.pdf)</span>
@@ -128,51 +128,51 @@ export default function PrivacyDataTab({ onShowToast, onOpenConfirmModal }) {
           <button
             type="button"
             onClick={handleExportCsv}
-            className="btn btn-secondary btn-md border-emerald-500/40 text-emerald-300 hover:bg-emerald-500/10 shadow-md"
+            className="btn btn-secondary btn-md text-emerald-600 dark:text-emerald-300 border-emerald-300 dark:border-emerald-500/40 hover:bg-emerald-50 dark:hover:bg-emerald-500/10"
           >
-            <Download className="w-4 h-4 text-emerald-400" />
+            <Download className="w-4 h-4" />
             <span>Download CSV Spreadsheet (.csv)</span>
           </button>
 
           <button
             type="button"
             onClick={handleExportWord}
-            className="btn btn-secondary btn-md border-indigo-500/40 text-indigo-300 hover:bg-indigo-500/10 shadow-md"
+            className="btn btn-secondary btn-md text-indigo-600 dark:text-indigo-300 border-indigo-300 dark:border-indigo-500/40 hover:bg-indigo-50 dark:hover:bg-indigo-500/10"
           >
-            <FileSpreadsheet className="w-4 h-4 text-indigo-400" />
+            <FileSpreadsheet className="w-4 h-4" />
             <span>Download Word Document (.docx)</span>
           </button>
 
           <button
             type="button"
             onClick={handleDirectExport}
-            className="btn btn-outline btn-md border-cyan-500/40 text-cyan-300 hover:bg-cyan-500/10"
+            className="btn btn-outline btn-md"
           >
-            <Download className="w-4 h-4 text-cyan-400" />
+            <Download className="w-4 h-4" />
             <span>Export JSON Archive (.json)</span>
           </button>
         </div>
       </div>
 
       {/* Unarchive & Retrieve Data Package */}
-      <div className="card-base p-6 border-slate-800 space-y-4 bg-[#0b1021]/90">
-        <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+      <div className="card-base p-6 space-y-4">
+        <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3">
           <div className="flex items-center gap-2">
-            <RefreshCw className="w-5 h-5 text-emerald-400" />
-            <h3 className="text-sm font-bold text-slate-100 uppercase tracking-wider font-mono">
+            <RefreshCw className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
+            <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 uppercase tracking-wider font-mono">
               Unarchive & Retrieve Enterprise Data
             </h3>
           </div>
           <span className="badge badge-low text-[10px]">Restoration Enabled</span>
         </div>
 
-        <p className="text-xs text-slate-300 leading-relaxed">
+        <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
           Unarchive and retrieve previously saved contract compliance archives, raw document vaults, risk evaluations, and audit histories back into your active workspace.
         </p>
 
         <div className="flex flex-wrap items-center gap-3">
-          <label className="btn btn-secondary btn-md cursor-pointer border-emerald-500/40 hover:bg-emerald-500/10">
-            <UploadCloud className="w-4 h-4 text-emerald-400" />
+          <label className="btn btn-secondary btn-md cursor-pointer border-emerald-300 dark:border-emerald-500/40 text-emerald-700 dark:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-500/10">
+            <UploadCloud className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
             <span>Unarchive / Upload Data Package</span>
             <input
               type="file"
@@ -192,33 +192,33 @@ export default function PrivacyDataTab({ onShowToast, onOpenConfirmModal }) {
             onClick={() => {
               onShowToast('Latest system archive unarchived successfully! Restored 148 contracts and compliance streams to active workspace.');
             }}
-            className="btn btn-outline btn-md border-cyan-500/40 text-cyan-300 hover:bg-cyan-500/10"
+            className="btn btn-outline btn-md text-blue-600 dark:text-blue-400"
           >
-            <FolderOpen className="w-4 h-4 text-cyan-400" />
+            <FolderOpen className="w-4 h-4 text-blue-600 dark:text-blue-400" />
             <span>Retrieve Latest Archived Data</span>
           </button>
         </div>
       </div>
 
       {/* Danger Zone: Delete Account */}
-      <div className="card-base p-6 border-rose-500/40 bg-rose-950/20 space-y-4">
-        <div className="flex items-center justify-between border-b border-rose-900/50 pb-3">
+      <div className="card-base p-6 border-rose-200 dark:border-rose-500/40 bg-rose-50 dark:bg-rose-950/20 space-y-4">
+        <div className="flex items-center justify-between border-b border-rose-200 dark:border-rose-900/50 pb-3">
           <div className="flex items-center gap-2">
-            <AlertTriangle className="w-5 h-5 text-rose-400" />
-            <h3 className="text-sm font-bold text-rose-200 uppercase tracking-wider font-mono">
+            <AlertTriangle className="w-5 h-5 text-rose-500 dark:text-rose-400" />
+            <h3 className="text-sm font-bold text-rose-700 dark:text-rose-200 uppercase tracking-wider font-mono">
               Danger Zone — Account Deletion
             </h3>
           </div>
         </div>
 
-        <p className="text-xs text-rose-300/90 leading-relaxed">
+        <p className="text-xs text-rose-600 dark:text-rose-300/90 leading-relaxed">
           Permanently erase your enterprise counsel account, all uploaded legal documents, vector spaces, custom negotiation fallback rules, and audit streams. This action cannot be reversed.
         </p>
 
         <button
           type="button"
           onClick={() => onOpenConfirmModal('deleteAccount')}
-          className="btn btn-danger btn-md shadow-lg shadow-rose-950/50"
+          className="btn btn-danger btn-md"
         >
           <Trash2 className="w-4 h-4" />
           <span>Delete Enterprise Account</span>

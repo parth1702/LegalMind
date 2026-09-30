@@ -110,7 +110,7 @@ export default function ProfilePage() {
       {/* Toast Notification */}
       {toastMsg && (
         <div className="fixed bottom-6 right-6 z-50 alert alert-info shadow-2xl animate-in slide-in-from-bottom duration-200">
-          <CheckCircle2 className="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" />
+          <CheckCircle2 className="w-4 h-4 text-blue-500 dark:text-blue-400 shrink-0 mt-0.5" />
           <span className="text-xs font-semibold">{toastMsg}</span>
         </div>
       )}
@@ -128,13 +128,13 @@ export default function ProfilePage() {
       />
 
       {/* Top Profile Summary Card */}
-      <div className="card-elevated p-6 sm:p-8 bg-gradient-to-r from-[#0b1021] via-[#0e162e] to-[#0b1021] border-slate-800 space-y-6 shadow-2xl">
+      <div className="card-elevated p-6 sm:p-8 bg-gradient-to-r from-blue-50 via-white to-indigo-50 dark:from-[#0b1021] dark:via-[#0e162e] dark:to-[#0b1021] border-slate-200 dark:border-slate-800 space-y-6 shadow-sm">
         <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6">
           {/* Avatar Container */}
           <div className="relative group shrink-0">
             <div
               onClick={handleAvatarClick}
-              className="w-24 h-24 rounded-2xl bg-cyan-500/10 border-2 border-cyan-500/40 flex items-center justify-center text-cyan-400 font-bold text-2xl font-mono shadow-glow cursor-pointer overflow-hidden relative group"
+              className="w-24 h-24 rounded-2xl bg-blue-50 dark:bg-blue-500/10 border-2 border-blue-200 dark:border-blue-500/40 flex items-center justify-center text-blue-600 dark:text-blue-400 font-bold text-2xl font-mono cursor-pointer overflow-hidden relative group"
               title="Click to upload profile picture"
             >
               {user?.avatar ? (
@@ -148,7 +148,7 @@ export default function ProfilePage() {
               )}
 
               {/* Hover overlay prompt */}
-              <div className="absolute inset-0 bg-slate-950/70 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center text-cyan-300 text-[10px] font-mono gap-1">
+              <div className="absolute inset-0 bg-slate-800/70 dark:bg-slate-950/70 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center text-white dark:text-blue-300 text-[10px] font-mono gap-1">
                 <Camera className="w-5 h-5" />
                 <span>Upload</span>
               </div>
@@ -157,7 +157,7 @@ export default function ProfilePage() {
             <button
               type="button"
               onClick={handleAvatarClick}
-              className="absolute -bottom-2 -right-2 p-2 rounded-xl bg-slate-900 border border-slate-700 text-cyan-400 hover:text-cyan-200 transition-colors shadow-lg"
+              className="absolute -bottom-2 -right-2 p-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-200 transition-colors shadow-md"
               title="Change Profile Avatar"
             >
               <Camera className="w-4 h-4" />
@@ -180,25 +180,25 @@ export default function ProfilePage() {
           <div className="space-y-3 flex-1 text-center sm:text-left">
             <div className="space-y-1">
               <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2">
-                <h1 className="text-xl sm:text-2xl font-bold text-slate-100">{user?.name || 'Legal Counsel'}</h1>
+                <h1 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-slate-100">{user?.name || 'Legal Counsel'}</h1>
                 <span className="badge badge-ai text-[10px] capitalize">{user?.role || 'Attorney'}</span>
               </div>
-              <p className="text-xs text-slate-400 font-mono">
+              <p className="text-xs text-slate-500 dark:text-slate-400 font-mono">
                 {user?.email || 'counsel@legalmind.ai'} • {user?.organization || 'LegalMind Enterprise'}
               </p>
             </div>
 
-            <div className="flex flex-wrap items-center justify-center sm:justify-start gap-4 text-xs text-slate-300 pt-1">
+            <div className="flex flex-wrap items-center justify-center sm:justify-start gap-4 text-xs text-slate-600 dark:text-slate-300 pt-1">
               <div className="flex items-center gap-1.5 font-mono text-[11px]">
-                <Briefcase className="w-3.5 h-3.5 text-cyan-400" />
+                <Briefcase className="w-3.5 h-3.5 text-blue-500 dark:text-blue-400" />
                 <span className="capitalize">{user?.role || 'Attorney'} Counsel</span>
               </div>
               <div className="flex items-center gap-1.5 font-mono text-[11px]">
-                <Building className="w-3.5 h-3.5 text-indigo-400" />
+                <Building className="w-3.5 h-3.5 text-indigo-500 dark:text-indigo-400" />
                 <span>{user?.organization || 'LegalMind Enterprise'}</span>
               </div>
               <div className="flex items-center gap-1.5 font-mono text-[11px]">
-                <Calendar className="w-3.5 h-3.5 text-emerald-400" />
+                <Calendar className="w-3.5 h-3.5 text-emerald-500 dark:text-emerald-400" />
                 <span>
                   Member since {user?.createdAt ? new Date(user.createdAt).toLocaleDateString() : 'Active Session'}
                 </span>
@@ -213,11 +213,11 @@ export default function ProfilePage() {
         {/* Left Column: Plan Tier & Security Status */}
         <div className="lg:col-span-5 space-y-6">
           {/* License Tier */}
-          <div className="card-base p-6 border-slate-800 space-y-4 bg-[#0b1021]/90">
-            <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+          <div className="card-base p-6 space-y-4">
+            <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3">
               <div className="flex items-center gap-2">
-                <Award className="w-5 h-5 text-cyan-400" />
-                <h3 className="text-sm font-bold text-slate-100 uppercase tracking-wider font-mono">
+                <Award className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+                <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 uppercase tracking-wider font-mono">
                   Enterprise License Tier
                 </h3>
               </div>
@@ -225,13 +225,13 @@ export default function ProfilePage() {
             </div>
 
             <div className="space-y-2">
-              <div className="text-lg font-bold text-slate-100 font-mono">Enterprise AI Plan</div>
-              <p className="text-xs text-slate-400 leading-relaxed">
+              <div className="text-lg font-bold text-slate-900 dark:text-slate-100 font-mono">Enterprise AI Plan</div>
+              <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
                 Includes unlimited document vector parsing, 4-tier risk matrix extraction, and multi-user counsel seat access.
               </p>
             </div>
 
-            <div className="p-3 rounded-xl bg-slate-950 border border-slate-800 text-xs font-mono text-cyan-300 space-y-1">
+            <div className="p-3 rounded-xl bg-blue-50 dark:bg-slate-950 border border-blue-100 dark:border-slate-800 text-xs font-mono text-blue-700 dark:text-blue-300 space-y-1">
               <div className="flex justify-between">
                 <span>Vector Capacity:</span>
                 <span className="font-bold">Unlimited</span>
@@ -244,21 +244,21 @@ export default function ProfilePage() {
           </div>
 
           {/* Security Status */}
-          <div className="card-base p-6 border-slate-800 space-y-3 bg-[#0b1021]/90">
-            <span className="text-xs font-mono font-bold text-slate-300 uppercase tracking-wider block">
+          <div className="card-base p-6 space-y-3">
+            <span className="text-xs font-mono font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider block">
               Security Readiness
             </span>
             <div className="space-y-2 text-xs">
-              <div className="flex items-center justify-between p-2.5 rounded-lg bg-slate-900/60 border border-slate-800">
-                <span className="text-slate-300">2-Factor Authentication</span>
+              <div className="flex items-center justify-between p-2.5 rounded-lg bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800">
+                <span className="text-slate-700 dark:text-slate-300">2-Factor Authentication</span>
                 <span className="badge badge-low text-[10px]">Enabled</span>
               </div>
-              <div className="flex items-center justify-between p-2.5 rounded-lg bg-slate-900/60 border border-slate-800">
-                <span className="text-slate-300">SAML 2.0 Single Sign-On</span>
+              <div className="flex items-center justify-between p-2.5 rounded-lg bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800">
+                <span className="text-slate-700 dark:text-slate-300">SAML 2.0 Single Sign-On</span>
                 <span className="badge badge-low text-[10px]">Connected</span>
               </div>
-              <div className="flex items-center justify-between p-2.5 rounded-lg bg-slate-900/60 border border-slate-800">
-                <span className="text-slate-300">Zero LLM Data Retention</span>
+              <div className="flex items-center justify-between p-2.5 rounded-lg bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800">
+                <span className="text-slate-700 dark:text-slate-300">Zero LLM Data Retention</span>
                 <span className="badge badge-ai text-[10px]">Enforced</span>
               </div>
             </div>
@@ -266,11 +266,11 @@ export default function ProfilePage() {
         </div>
 
         {/* Right Column: Recent Activity Feed */}
-        <div className="lg:col-span-7 card-base p-6 border-slate-800 space-y-4 bg-[#0b1021]/90">
-          <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+        <div className="lg:col-span-7 card-base p-6 space-y-4">
+          <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3">
             <div className="flex items-center gap-2">
-              <Activity className="w-5 h-5 text-indigo-400" />
-              <h3 className="text-sm font-bold text-slate-100 uppercase tracking-wider font-mono">
+              <Activity className="w-5 h-5 text-indigo-500 dark:text-indigo-400" />
+              <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 uppercase tracking-wider font-mono">
                 Recent Counsel Activity Stream
               </h3>
             </div>
@@ -281,18 +281,18 @@ export default function ProfilePage() {
             {mockProfileActivity.map((act) => (
               <div
                 key={act.id}
-                className="p-3.5 rounded-xl bg-slate-900/60 border border-slate-800 flex items-center justify-between text-xs"
+                className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 flex items-center justify-between text-xs"
               >
                 <div className="flex items-center gap-3">
-                  <div className="p-2 rounded-lg bg-slate-950 border border-slate-800 text-cyan-400">
+                  <div className="p-2 rounded-lg bg-blue-50 dark:bg-slate-950 border border-blue-200 dark:border-slate-800 text-blue-600 dark:text-blue-400">
                     <FileText className="w-4 h-4" />
                   </div>
                   <div>
-                    <span className="font-bold text-slate-200 block">{act.action}</span>
-                    <span className="text-[11px] font-mono text-slate-400">{act.target}</span>
+                    <span className="font-bold text-slate-900 dark:text-slate-200 block">{act.action}</span>
+                    <span className="text-[11px] font-mono text-slate-500 dark:text-slate-400">{act.target}</span>
                   </div>
                 </div>
-                <span className="text-[10px] font-mono text-slate-500 shrink-0">{act.time}</span>
+                <span className="text-[10px] font-mono text-slate-400 dark:text-slate-500 shrink-0">{act.time}</span>
               </div>
             ))}
           </div>

@@ -12,8 +12,8 @@ export default function UploadQueueList({
 
   return (
     <div className="space-y-3 pt-2">
-      <div className="flex items-center justify-between border-b border-slate-800 pb-2">
-        <span className="text-xs font-mono font-bold text-slate-200 uppercase tracking-wider">
+      <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-2">
+        <span className="text-xs font-mono font-bold text-slate-900 dark:text-slate-200 uppercase tracking-wider">
           Upload Queue ({queue.length} {queue.length === 1 ? 'file' : 'files'})
         </span>
       </div>
@@ -22,16 +22,16 @@ export default function UploadQueueList({
         {queue.map((item) => (
           <div
             key={item.id}
-            className="p-4 rounded-xl bg-slate-900/80 border border-slate-800 space-y-3 transition-colors"
+            className="p-4 rounded-xl bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 space-y-3 transition-colors"
           >
             {/* Top Info Row */}
             <div className="flex items-center justify-between gap-3">
               <div className="flex items-center gap-3 min-w-0">
-                <div className="p-2 rounded-lg bg-slate-950 border border-slate-800 text-cyan-400 shrink-0">
+                <div className="p-2 rounded-lg bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-blue-600 dark:text-cyan-400 shrink-0">
                   <FileText className="w-4 h-4" />
                 </div>
                 <div className="min-w-0">
-                  <span className="text-xs font-bold text-slate-200 truncate block">
+                  <span className="text-xs font-bold text-slate-900 dark:text-slate-200 truncate block">
                     {item.name}
                   </span>
                   <span className="text-[10px] font-mono text-slate-500">
@@ -46,7 +46,7 @@ export default function UploadQueueList({
                   <button
                     type="button"
                     onClick={() => onCancel(item.id)}
-                    className="p-1.5 rounded-lg text-slate-400 hover:text-slate-200 hover:bg-slate-800 transition-colors"
+                    className="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors"
                     title="Cancel upload"
                   >
                     <X className="w-4 h-4" />
@@ -57,7 +57,7 @@ export default function UploadQueueList({
                   <button
                     type="button"
                     onClick={() => onRetry(item.id)}
-                    className="p-1.5 rounded-lg text-rose-400 hover:text-rose-300 hover:bg-rose-950/40 transition-colors flex items-center gap-1 text-xs font-mono"
+                    className="p-1.5 rounded-lg text-rose-600 hover:text-rose-700 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/40 transition-colors flex items-center gap-1 text-xs font-mono"
                     title="Retry processing"
                   >
                     <RefreshCw className="w-3.5 h-3.5" />
@@ -68,7 +68,7 @@ export default function UploadQueueList({
                 <button
                   type="button"
                   onClick={() => onRemove(item.id)}
-                  className="p-1.5 rounded-lg text-slate-500 hover:text-rose-400 hover:bg-slate-800 transition-colors"
+                  className="p-1.5 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors"
                   title="Remove from queue"
                 >
                   <Trash2 className="w-4 h-4" />

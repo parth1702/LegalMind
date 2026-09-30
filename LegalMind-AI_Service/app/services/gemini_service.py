@@ -44,10 +44,20 @@ When applicable:
 - Maintain professional legal tone with clear bullet points and markdown headers."""
 
 
+from app.services.groq_service import groq_service
+
+GEMINI_CANDIDATE_MODELS = [
+    "gemini-2.5-flash",
+    "gemini-1.5-flash",
+    "gemini-2.0-flash",
+    "gemini-2.5-pro",
+]
+
+
 class GeminiService:
     """
     Clean Gemini Service Abstraction managing Google GenAI client lifecycle,
-    grounded RAG reasoning, and structured legal analysis.
+    grounded RAG reasoning, and structured legal analysis with Groq API failover.
     """
 
     def __init__(self) -> None:
@@ -60,7 +70,6 @@ class GeminiService:
         api_key = settings.GEMINI_API_KEY or os.getenv("GEMINI_API_KEY")
         model_name = settings.GEMINI_MODEL or os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
         
-        # Fallback list of models if configured model hits quota or deprecated
         self._model = model_name
 
         if api_key and api_key.strip():
@@ -72,14 +81,14 @@ class GeminiService:
                 logger.error(f"[GEMINI] Failed to initialize GenAI client: {exc}")
                 self._client = None
         else:
-            logger.warning("[GEMINI] GEMINI_API_KEY is missing or empty. Gemini features will return controlled service errors.")
+            logger.warning("[GEMINI] GEMINI_API_KEY missing or empty. Will use Groq API fallback.")
             self._client = None
 
     def is_available(self) -> bool:
-        """Check if Gemini client is properly configured and initialized."""
+        """Check if Gemini client or Groq fallback is available."""
         if not self._client:
             self._init_client()
-        return self._client is not None
+        return self._client is not None or groq_service.is_available()
 
     def generate_grounded_answer(
         self,
@@ -89,23 +98,12 @@ class GeminiService:
         user_id: str = "",
     ) -> Dict[str, Any]:
         """
-        Generate grounded legal answer using Gemini based ONLY on supplied sources package.
-        Returns dict with keys: 'answer', 'evidence_found', 'raw_response', 'error'.
+        Generate grounded legal answer using Gemini (or Groq failover) based ONLY on supplied sources package.
         """
-        if not self.is_available():
-            logger.warning(f"[GEMINI] Unavailable for doc_id='{document_id}'. GEMINI_API_KEY not configured.")
-            return {
-                "success": False,
-                "answer": "AI Service configuration error: GEMINI_API_KEY is not configured.",
-                "evidence_found": False,
-                "error": "GEMINI_UNAVAILABLE",
-            }
-
         if not sources:
-            logger.info(f"[GEMINI] model={self._model} request_document_id={document_id} source_count=0 status=no_evidence")
             return {
                 "success": True,
-                "answer": "I cannot find relevant evidence in the uploaded document.",
+                "answer": "I cannot find relevant evidence in the uploaded document to answer your question.",
                 "evidence_found": False,
                 "error": None,
             }
@@ -132,55 +130,59 @@ class GeminiService:
         source_package = "\n---\n".join(source_package_lines)
 
         full_prompt = (
-            f"{SYSTEM_GROUNDED_PROMPT}\n\n"
             f"EVIDENCE SOURCE PACKAGE:\n{source_package}\n\n"
             f"USER QUESTION: {query}\n\n"
             f"ANSWER:"
         )
 
-        max_retries = 2
         last_error = None
 
-        for attempt in range(max_retries + 1):
-            try:
-                t0 = time.time()
-                # Use official google-genai SDK models.generate_content API
-                response = self._client.models.generate_content(
-                    model=self._model,
-                    contents=full_prompt,
-                )
-                elapsed = round((time.time() - t0) * 1000, 2)
+        # 1. Try Gemini API first if client exists
+        if self._client:
+            models_to_try = [self._model] + [m for m in GEMINI_CANDIDATE_MODELS if m != self._model]
+            for candidate_model in models_to_try:
+                try:
+                    t0 = time.time()
+                    response = self._client.models.generate_content(
+                        model=candidate_model,
+                        contents=f"{SYSTEM_GROUNDED_PROMPT}\n\n{full_prompt}",
+                    )
+                    elapsed = round((time.time() - t0) * 1000, 2)
+                    text_out = (response.text or "").strip()
+                    if text_out:
+                        logger.info(f"[GEMINI] Answer generated using '{candidate_model}' in {elapsed}ms.")
+                        return {
+                            "success": True,
+                            "answer": text_out,
+                            "evidence_found": True,
+                            "error": None,
+                        }
+                except Exception as exc:
+                    last_error = str(exc)
+                    logger.warning(f"[GEMINI] Model '{candidate_model}' attempt failed: {exc}")
 
-                text_out = (response.text or "").strip()
-                if not text_out:
-                    raise ValueError("Empty text response received from Gemini API.")
-
-                logger.info(f"[GEMINI] model={self._model} request_document_id={document_id} source_count={len(sources)} elapsed_ms={elapsed} status=success")
-
+        # 2. FAILOVER TO GROQ API if Gemini fails or is not configured
+        if groq_service.is_available():
+            logger.info("[LLM FAILOVER] Gemini failed or unavailable. Switching to Groq API fallback.")
+            groq_res = groq_service.generate_chat_completion(
+                messages=[
+                    {"role": "system", "content": SYSTEM_GROUNDED_PROMPT},
+                    {"role": "user", "content": full_prompt},
+                ]
+            )
+            if groq_res.get("success") and groq_res.get("answer"):
                 return {
                     "success": True,
-                    "answer": text_out,
+                    "answer": groq_res["answer"],
                     "evidence_found": True,
                     "error": None,
                 }
-            except Exception as exc:
-                last_error = str(exc)
-                logger.warning(f"[GEMINI] Attempt {attempt + 1} failed for doc_id='{document_id}': {exc}")
-                
-                # Check for model not found / quota / rate limit errors to fallback model if needed
-                if "not found" in last_error.lower() or "404" in last_error:
-                    # Fallback model attempt
-                    self._model = "gemini-2.0-flash" if self._model != "gemini-2.0-flash" else "gemini-1.5-flash"
-                    logger.info(f"[GEMINI] Switching model fallback to '{self._model}'")
+            last_error = groq_res.get("error") or last_error
 
-                if attempt < max_retries:
-                    time.sleep(1.0 * (2 ** attempt))
-
-        logger.error(f"[GEMINI] model={self._model} request_document_id={document_id} source_count={len(sources)} status=failure error='{last_error}'")
-
+        logger.error(f"[LLM ERROR] Both Gemini and Groq APIs failed. Last error: {last_error}")
         return {
             "success": False,
-            "answer": "AI Service error: Unable to generate answer from Gemini model.",
+            "answer": "AI Service error: Both Gemini and Groq API calls encountered errors.",
             "evidence_found": False,
             "error": last_error,
         }
@@ -193,58 +195,55 @@ class GeminiService:
     ) -> Dict[str, Any]:
         """
         Generate comprehensive, expert legal co-pilot answer for general legal queries,
-        statutory guidance, legal definitions, contract drafting advice, and legal compliance.
+        statutory guidance, legal definitions, and compliance with Groq API failover.
         """
-        if not self.is_available():
-            logger.warning(f"[GEMINI] Unavailable for copilot legal query.")
-            return {
-                "success": False,
-                "answer": "AI Service configuration error: GEMINI_API_KEY is not configured.",
-                "evidence_found": False,
-                "error": "GEMINI_UNAVAILABLE",
-            }
-
-        full_prompt = (
-            f"{SYSTEM_COPILOT_GENERAL_PROMPT}\n\n"
-            f"LEGAL QUERY: {query}\n\n"
-            f"EXPERT LEGAL CO-PILOT RESPONSE:"
-        )
-
-        max_retries = 2
         last_error = None
 
-        for attempt in range(max_retries + 1):
-            try:
-                t0 = time.time()
-                response = self._client.models.generate_content(
-                    model=self._model,
-                    contents=full_prompt,
-                )
-                elapsed = round((time.time() - t0) * 1000, 2)
+        # 1. Try Gemini API first
+        if self._client:
+            models_to_try = [self._model] + [m for m in GEMINI_CANDIDATE_MODELS if m != self._model]
+            for candidate_model in models_to_try:
+                try:
+                    t0 = time.time()
+                    response = self._client.models.generate_content(
+                        model=candidate_model,
+                        contents=f"{SYSTEM_COPILOT_GENERAL_PROMPT}\n\nLEGAL QUERY: {query}\n\nEXPERT LEGAL CO-PILOT RESPONSE:",
+                    )
+                    elapsed = round((time.time() - t0) * 1000, 2)
+                    text_out = (response.text or "").strip()
+                    if text_out:
+                        logger.info(f"[GEMINI] Co-pilot answer generated using '{candidate_model}' in {elapsed}ms.")
+                        return {
+                            "success": True,
+                            "answer": text_out,
+                            "evidence_found": False,
+                            "error": None,
+                        }
+                except Exception as exc:
+                    last_error = str(exc)
+                    logger.warning(f"[GEMINI] Copilot '{candidate_model}' failed: {exc}")
 
-                text_out = (response.text or "").strip()
-                if not text_out:
-                    raise ValueError("Empty response received from Gemini model.")
-
-                logger.info(f"[GEMINI] Legal Co-Pilot answer generated for query='{query[:50]}' elapsed_ms={elapsed}")
+        # 2. FAILOVER TO GROQ API
+        if groq_service.is_available():
+            logger.info("[LLM FAILOVER] Gemini Co-Pilot failed or unavailable. Switching to Groq API fallback.")
+            groq_res = groq_service.generate_chat_completion(
+                messages=[
+                    {"role": "system", "content": SYSTEM_COPILOT_GENERAL_PROMPT},
+                    {"role": "user", "content": f"LEGAL QUERY: {query}"},
+                ]
+            )
+            if groq_res.get("success") and groq_res.get("answer"):
                 return {
                     "success": True,
-                    "answer": text_out,
+                    "answer": groq_res["answer"],
                     "evidence_found": False,
                     "error": None,
                 }
-            except Exception as exc:
-                last_error = str(exc)
-                logger.warning(f"[GEMINI] Copilot attempt {attempt + 1} failed: {exc}")
-                if "not found" in last_error.lower() or "404" in last_error:
-                    self._model = "gemini-2.0-flash" if self._model != "gemini-2.0-flash" else "gemini-1.5-flash"
-
-                if attempt < max_retries:
-                    time.sleep(1.0 * (2 ** attempt))
+            last_error = groq_res.get("error") or last_error
 
         return {
             "success": False,
-            "answer": "AI Service error: Unable to generate legal co-pilot answer.",
+            "answer": "AI Service error: Both Gemini and Groq API calls failed.",
             "evidence_found": False,
             "error": last_error,
         }

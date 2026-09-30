@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import WelcomeBanner from '../components/dashboard/WelcomeBanner';
 import StatCardsGrid from '../components/dashboard/StatCardsGrid';
@@ -7,7 +7,9 @@ import AnalysisTrendsChart from '../components/dashboard/AnalysisTrendsChart';
 import RecentDocumentsTable from '../components/dashboard/RecentDocumentsTable';
 import ActivityFeedStream from '../components/dashboard/ActivityFeedStream';
 import AiAssistantShortcut from '../components/dashboard/AiAssistantShortcut';
-import DashboardQuickActions from '../components/dashboard/DashboardQuickActions';
+import ContractVisualDiagram from '../components/analysis/ContractVisualDiagram';
+import LegalGlossaryCard from '../components/analysis/LegalGlossaryCard';
+import SourceEvidenceDrawer from '../components/documents/SourceEvidenceDrawer';
 import PageHeader from '../components/layout/PageHeader';
 import StatusIndicator from '../components/brand/StatusIndicator';
 import { useUpload } from '../context/useUpload';
@@ -16,6 +18,7 @@ import { AlertCircle, RefreshCw, UploadCloud, FileText } from 'lucide-react';
 
 export default function DashboardPage() {
   const { openUploadModal } = useUpload();
+  const [sourceDrawerState, setSourceDrawerState] = useState({ isOpen: false, item: null });
 
   const handleUploadClick = () => {
     openUploadModal();
@@ -118,9 +121,6 @@ export default function DashboardPage() {
             highRiskCount={stats.highRiskDocuments.value}
           />
 
-          {/* Quick Actions Bar */}
-          <DashboardQuickActions onUploadClick={handleUploadClick} />
-
           {/* Statistics Grid */}
           <StatCardsGrid stats={stats} />
 
@@ -129,6 +129,12 @@ export default function DashboardPage() {
             <RiskDistributionChart data={riskDistribution} />
             <AnalysisTrendsChart data={analysisTrends} />
           </div>
+
+          {/* Interactive Visual Contract Risk Diagram */}
+          <ContractVisualDiagram />
+
+          {/* Extracted Key Legal Terms, Statutory Acts & Plain-English Glossary */}
+          <LegalGlossaryCard onOpenSourceQuote={(item) => setSourceDrawerState({ isOpen: true, item })} />
 
           {/* AI Assistant Shortcut Bar */}
           <AiAssistantShortcut />
@@ -167,6 +173,13 @@ export default function DashboardPage() {
           )}
         </div>
       )}
+
+      {/* Source Evidence Inspection Drawer */}
+      <SourceEvidenceDrawer
+        isOpen={sourceDrawerState.isOpen}
+        item={sourceDrawerState.item}
+        onClose={() => setSourceDrawerState({ isOpen: false, item: null })}
+      />
     </div>
   );
 }
