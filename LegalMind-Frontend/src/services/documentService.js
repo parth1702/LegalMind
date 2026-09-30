@@ -1,4 +1,6 @@
 import apiClient from './api';
+
+const AI_BASE_URL = import.meta.env.VITE_AI_BASE_URL || 'http://localhost:8000';
 import { mockDocumentsList } from '../data/documentsMockData';
 
 const LOCAL_DOCS_KEY = 'legalmind_local_documents';
@@ -233,7 +235,7 @@ export const deleteDocumentApi = async (id) => {
  */
 export const getContractRoadmapApi = async (documentId, contractText = '') => {
   try {
-    const response = await fetch('http://localhost:8000/api/v1/rag/action-roadmap', {
+    const response = await fetch(`${AI_BASE_URL}/api/v1/rag/action-roadmap`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ document_id: documentId, contract_text: contractText }),
@@ -253,7 +255,7 @@ export const getContractRoadmapApi = async (documentId, contractText = '') => {
  */
 export const rewriteClauseApi = async (originalClause, riskTopic = 'Contract Risk Mitigation') => {
   try {
-    const response = await fetch('http://localhost:8000/api/v1/rag/rewrite-clause', {
+    const response = await fetch(`${AI_BASE_URL}/api/v1/rag/rewrite-clause`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ original_clause: originalClause, risk_topic: riskTopic }),
