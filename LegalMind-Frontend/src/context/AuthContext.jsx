@@ -31,9 +31,12 @@ export function AuthProvider({ children }) {
 
   const handleLogin = async (credentials) => {
     const res = await loginApi(credentials);
-    if (res.token && res.user) {
-      localStorage.setItem('legalmind_token', res.token);
-      setToken(res.token);
+    if (res.user) {
+      // Only store a real JWT token — never store null or fake tokens
+      if (res.token) {
+        localStorage.setItem('legalmind_token', res.token);
+        setToken(res.token);
+      }
       setUser(res.user);
     }
     return res;
@@ -41,9 +44,12 @@ export function AuthProvider({ children }) {
 
   const handleRegister = async (userData) => {
     const res = await registerApi(userData);
-    if (res.token && res.user) {
-      localStorage.setItem('legalmind_token', res.token);
-      setToken(res.token);
+    if (res.user) {
+      // Only store a real JWT token — never store null or fake tokens
+      if (res.token) {
+        localStorage.setItem('legalmind_token', res.token);
+        setToken(res.token);
+      }
       setUser(res.user);
     }
     return res;

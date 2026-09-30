@@ -8,22 +8,22 @@ export default function SourceCitationCard({ source }) {
   if (!source) return null;
 
   return (
-    <div className="p-3 rounded-xl bg-slate-950 border border-slate-800 space-y-2 text-xs font-mono">
+    <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 space-y-2 text-xs font-mono">
       <div className="flex items-center justify-between gap-2">
         <div className="flex items-center gap-2 min-w-0">
-          <FileText className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
-          <span className="font-bold text-slate-200 truncate">{source.documentName}</span>
-          <span className="text-[10px] text-cyan-400 bg-cyan-950/60 px-1.5 py-0.5 rounded border border-cyan-800/50 shrink-0">
+          <FileText className="w-3.5 h-3.5 text-blue-600 dark:text-cyan-400 shrink-0" />
+          <span className="font-bold text-slate-800 dark:text-slate-200 truncate">{source.documentName}</span>
+          <span className="text-[10px] text-blue-700 bg-blue-50 px-1.5 py-0.5 rounded border border-blue-200 dark:text-cyan-400 dark:bg-cyan-950/60 dark:border-cyan-800/50 shrink-0">
             Page {source.pageNumber}
           </span>
         </div>
 
         <div className="flex items-center gap-1 shrink-0">
-          <span className="text-[10px] text-slate-400">{source.confidence} Match</span>
+          <span className="text-[10px] text-slate-500 dark:text-slate-400">{source.confidence} Match</span>
           <button
             type="button"
             onClick={() => setIsExpanded((prev) => !prev)}
-            className="p-1 text-slate-400 hover:text-slate-200 transition-colors"
+            className="p-1 text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 transition-colors"
             aria-label={isExpanded ? 'Collapse citation' : 'Expand citation'}
           >
             {isExpanded ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
@@ -31,17 +31,17 @@ export default function SourceCitationCard({ source }) {
         </div>
       </div>
 
-      <div className="text-[11px] text-cyan-300 font-semibold truncate">
+      <div className="text-[11px] text-blue-700 dark:text-cyan-300 font-semibold truncate">
         {source.section}
       </div>
 
       {isExpanded && (
-        <div className="pt-2 border-t border-slate-800/80 text-[11px] text-slate-300 italic font-serif leading-relaxed space-y-2 animate-in fade-in duration-150">
+        <div className="pt-2 border-t border-slate-200 dark:border-slate-800/80 text-[11px] text-slate-700 dark:text-slate-300 italic font-serif leading-relaxed space-y-2 animate-in fade-in duration-150">
           <p>"{source.snippet}"</p>
           <div className="flex justify-end pt-1">
             <Link
               to="/app/analysis"
-              className="inline-flex items-center gap-1 text-[10px] font-mono text-cyan-400 hover:text-cyan-300"
+              className="inline-flex items-center gap-1 text-[10px] font-mono text-blue-600 dark:text-cyan-400 hover:underline"
             >
               <span>Open in Document Viewer</span>
               <ExternalLink className="w-3 h-3" />

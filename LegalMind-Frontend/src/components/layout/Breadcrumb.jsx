@@ -19,11 +19,11 @@ export default function Breadcrumb({ className = '' }) {
 
   return (
     <nav aria-label="Breadcrumb navigation" className={`flex items-center text-xs font-medium ${className}`}>
-      <ol className="flex items-center space-x-1.5 text-slate-400">
+      <ol className="flex items-center space-x-1.5 text-slate-500 dark:text-slate-400">
         <li>
           <Link
             to="/"
-            className="flex items-center hover:text-cyan-300 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-cyan-400 rounded px-1"
+            className="flex items-center text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-cyan-300 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-blue-500 rounded px-1"
             title="Back to Home"
           >
             <Home className="w-3.5 h-3.5 mr-1" />
@@ -40,15 +40,15 @@ export default function Breadcrumb({ className = '' }) {
 
           return (
             <li key={to} className="flex items-center space-x-1.5">
-              <ChevronRight className="w-3 h-3 text-slate-600 shrink-0" />
+              <ChevronRight className="w-3 h-3 text-slate-400 dark:text-slate-600 shrink-0" />
               {isLast ? (
-                <span className="text-slate-100 font-semibold px-1" aria-current="page">
+                <span className="text-slate-900 dark:text-slate-100 font-semibold px-1" aria-current="page">
                   {displayName}
                 </span>
               ) : (
                 <Link
                   to={to}
-                  className="hover:text-cyan-300 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-cyan-400 rounded px-1"
+                  className="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-cyan-300 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-blue-500 rounded px-1"
                 >
                   {displayName}
                 </Link>

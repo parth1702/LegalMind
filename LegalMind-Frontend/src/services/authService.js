@@ -14,9 +14,25 @@ export const loginApi = async (credentials) => {
     }
     return response;
   } catch (error) {
-    console.warn('[AuthService] Backend network offline, activating resilient login session:', error.message);
+    // Only activate offline fallback when there is NO network response at all
+    // (i.e. backend is truly unreachable). For HTTP error responses (401, 400, etc.)
+    // we must surface the real error so the user knows their credentials are wrong.
+    const isNetworkDown = !error.response && (
+      error.message === 'Network Error' ||
+      error.code === 'ECONNREFUSED' ||
+      error.code === 'ERR_NETWORK'
+    );
 
-    // Create session so user is never blocked by Network Error
+    if (!isNetworkDown) {
+      // Re-throw so the login page can display the actual error message
+      throw error;
+    }
+
+    console.warn('[AuthService] Backend is truly offline, activating resilient offline session:', error.message);
+
+    // NOTE: We do NOT create or store a fake token here.
+    // Storing a non-JWT string like "demo_token_*" causes "jwt malformed" errors
+    // on every subsequent authenticated API call (uploads, document fetch, etc.).
     const fallbackUser = {
       _id: 'usr_local_' + Date.now(),
       name: credentials.email ? credentials.email.split('@')[0].replace(/[._-]/g, ' ') : 'Counsel User',
@@ -27,15 +43,16 @@ export const loginApi = async (credentials) => {
       isOfflineFallback: true,
     };
 
-    const fallbackToken = 'demo_token_' + Date.now();
-    localStorage.setItem(TOKEN_KEY, fallbackToken);
+    // Store the user but do NOT store a fake token — authenticated endpoints
+    // simply won't work offline, which is correct and expected behaviour.
+    localStorage.removeItem(TOKEN_KEY);
     localStorage.setItem(LOCAL_USER_KEY, JSON.stringify(fallbackUser));
 
     return {
       success: true,
-      token: fallbackToken,
+      token: null,
       user: fallbackUser,
-      message: 'Authenticated successfully!',
+      message: 'Authenticated in offline mode. Some features require a connection.',
     };
   }
 };
@@ -51,7 +68,19 @@ export const registerApi = async (userData) => {
     }
     return response;
   } catch (error) {
-    console.warn('[AuthService] Backend network offline, activating resilient registration session:', error.message);
+    // Only activate offline fallback when backend is truly unreachable.
+    // Surface real HTTP errors (400 duplicate email, 422 validation, etc.) to the user.
+    const isNetworkDown = !error.response && (
+      error.message === 'Network Error' ||
+      error.code === 'ECONNREFUSED' ||
+      error.code === 'ERR_NETWORK'
+    );
+
+    if (!isNetworkDown) {
+      throw error;
+    }
+
+    console.warn('[AuthService] Backend is truly offline, activating resilient offline registration:', error.message);
 
     const fallbackUser = {
       _id: 'usr_local_' + Date.now(),
@@ -63,15 +92,15 @@ export const registerApi = async (userData) => {
       isOfflineFallback: true,
     };
 
-    const fallbackToken = 'demo_token_' + Date.now();
-    localStorage.setItem(TOKEN_KEY, fallbackToken);
+    // Do NOT store a fake token — non-JWT strings cause "jwt malformed" on authenticated routes.
+    localStorage.removeItem(TOKEN_KEY);
     localStorage.setItem(LOCAL_USER_KEY, JSON.stringify(fallbackUser));
 
     return {
       success: true,
-      token: fallbackToken,
+      token: null,
       user: fallbackUser,
-      message: 'Account created successfully!',
+      message: 'Account created in offline mode. Some features require a connection.',
     };
   }
 };

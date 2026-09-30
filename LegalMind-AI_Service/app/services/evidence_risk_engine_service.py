@@ -23,7 +23,7 @@ Risk Thresholds:
 """
 from __future__ import annotations
 
-from typing import List, Dict, Any, Optional
+from typing import List, Dict, Any, Optional, Tuple
 from app.core.logging import get_logger
 from app.schemas.evidence import EvidenceFinding
 from app.schemas.fact_extraction import DocumentFactExtractionResult

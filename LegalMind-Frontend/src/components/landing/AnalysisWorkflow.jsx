@@ -30,16 +30,16 @@ const steps = [
 
 export default function AnalysisWorkflow() {
   return (
-    <section id="workflow" className="py-16 sm:py-24 bg-[#050814] relative">
+    <section id="workflow" className="py-16 sm:py-24 bg-slate-50 dark:bg-[#050814] border-t border-slate-200 dark:border-slate-800/80 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         <div className="text-center space-y-3 max-w-2xl mx-auto">
-          <span className="text-xs font-mono uppercase tracking-wider text-cyan-400 font-semibold">
+          <span className="text-xs font-semibold uppercase tracking-wider text-blue-600 dark:text-sky-400">
             End-to-End Pipeline
           </span>
-          <h2 className="text-2xl sm:text-4xl font-bold text-slate-100">
+          <h2 className="text-2xl sm:text-4xl font-bold text-slate-900 dark:text-slate-100">
             How LegalMind AI Works
           </h2>
-          <p className="text-sm text-slate-400">
+          <p className="text-sm text-slate-600 dark:text-slate-400">
             From raw legal text to structured risk intelligence in four automated steps.
           </p>
         </div>
@@ -50,18 +50,18 @@ export default function AnalysisWorkflow() {
             return (
               <div
                 key={idx}
-                className="card-base p-6 space-y-4 border-slate-800/90 relative bg-[#0b1021]/60"
+                className="card-base p-6 space-y-4 relative"
               >
                 <div className="flex items-center justify-between">
-                  <div className="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400">
+                  <div className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-cyan-500/10 border border-blue-200 dark:border-cyan-500/30 flex items-center justify-center text-blue-600 dark:text-cyan-400">
                     <IconComponent className="w-5 h-5" />
                   </div>
-                  <span className="text-2xl font-bold font-mono text-slate-700">{item.step}</span>
+                  <span className="text-2xl font-bold font-mono text-slate-300 dark:text-slate-700">{item.step}</span>
                 </div>
 
                 <div className="space-y-2">
-                  <h3 className="text-base font-bold text-slate-100">{item.title}</h3>
-                  <p className="text-xs text-slate-400 leading-relaxed">{item.description}</p>
+                  <h3 className="text-base font-bold text-slate-900 dark:text-slate-100">{item.title}</h3>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">{item.description}</p>
                 </div>
               </div>
             );

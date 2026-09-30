@@ -41,14 +41,14 @@ export default function NotificationsPopover() {
       <button
         type="button"
         onClick={() => setIsOpen((prev) => !prev)}
-        className="relative p-2 rounded-xl text-slate-400 hover:text-slate-100 hover:bg-slate-800/80 transition-colors focus-visible:ring-2 focus-visible:ring-cyan-400"
+        className="relative p-2 rounded-xl text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-colors focus-visible:ring-2 focus-visible:ring-blue-500"
         aria-label="Notifications menu"
       >
         <Bell className="w-4 h-4" />
         {unreadCount > 0 && (
           <span className="absolute top-1.5 right-1.5 flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75" />
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-400" />
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-500 opacity-75" />
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-600" />
           </span>
         )}
       </button>
@@ -61,11 +61,11 @@ export default function NotificationsPopover() {
             onClick={() => setIsOpen(false)}
             aria-hidden="true"
           />
-          <div className="absolute right-0 mt-2 w-80 sm:w-96 bg-[#0b1021] border border-slate-800 rounded-2xl shadow-2xl z-40 overflow-hidden animate-in fade-in duration-150">
+          <div className="absolute right-0 mt-2 w-80 sm:w-96 bg-white dark:bg-[#0b1021] border border-slate-200 dark:border-slate-800 rounded-2xl shadow-xl z-40 overflow-hidden animate-in fade-in duration-150">
             {/* Popover Header */}
-            <div className="flex items-center justify-between px-4 py-3 border-b border-slate-800 bg-[#070b18]">
+            <div className="flex items-center justify-between px-4 py-3 border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#070b18]">
               <div className="flex items-center gap-2">
-                <span className="text-xs font-bold text-slate-100 uppercase tracking-wider font-mono">
+                <span className="text-xs font-bold text-slate-900 dark:text-slate-100 uppercase tracking-wider font-mono">
                   Notifications
                 </span>
                 <span className="badge badge-ai text-[10px]">{unreadCount} New</span>
@@ -73,30 +73,30 @@ export default function NotificationsPopover() {
               <button
                 type="button"
                 onClick={() => setUnreadCount(0)}
-                className="text-[11px] font-mono text-cyan-400 hover:text-cyan-300 transition-colors"
+                className="text-[11px] font-mono text-blue-600 dark:text-cyan-400 hover:text-blue-700 dark:hover:text-cyan-300 transition-colors"
               >
                 Mark all read
               </button>
             </div>
 
             {/* Notification Items */}
-            <div className="divide-y divide-slate-800/60 max-h-80 overflow-y-auto">
+            <div className="divide-y divide-slate-100 dark:divide-slate-800/60 max-h-80 overflow-y-auto">
               {notifications.map((item) => {
                 const IconComponent = item.icon;
                 return (
                   <div
                     key={item.id}
-                    className="p-3.5 hover:bg-slate-900/60 transition-colors flex items-start gap-3 cursor-pointer"
+                    className="p-3.5 hover:bg-slate-50 dark:hover:bg-slate-900/60 transition-colors flex items-start gap-3 cursor-pointer"
                   >
-                    <div className={`p-1.5 rounded-lg bg-slate-900 border border-slate-800 ${item.iconColor} shrink-0 mt-0.5`}>
+                    <div className="p-1.5 rounded-lg bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-blue-600 dark:text-blue-400 shrink-0 mt-0.5">
                       <IconComponent className="w-4 h-4" />
                     </div>
                     <div className="space-y-0.5">
-                      <div className="flex items-center justify-between text-xs font-semibold text-slate-200">
+                      <div className="flex items-center justify-between text-xs font-semibold text-slate-900 dark:text-slate-200">
                         <span>{item.title}</span>
-                        <span className="text-[10px] font-mono text-slate-500">{item.time}</span>
+                        <span className="text-[10px] font-mono text-slate-400 dark:text-slate-500">{item.time}</span>
                       </div>
-                      <p className="text-xs text-slate-400 leading-snug">{item.message}</p>
+                      <p className="text-xs text-slate-600 dark:text-slate-400 leading-snug">{item.message}</p>
                     </div>
                   </div>
                 );
@@ -104,7 +104,7 @@ export default function NotificationsPopover() {
             </div>
 
             {/* Footer */}
-            <div className="p-2.5 bg-slate-950 border-t border-slate-800 text-center">
+            <div className="p-2.5 bg-slate-50 dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800 text-center">
               <span className="text-[11px] font-mono text-slate-500">LegalMind Security & Activity Stream</span>
             </div>
           </div>

@@ -29,17 +29,17 @@ export default function Wordmark({
   return (
     <div className={`inline-flex flex-col ${className}`}>
       <div className="flex items-center gap-2 tracking-tight">
-        <span className={`font-bold text-slate-100 ${currentTextSize}`}>
-          Legal<span className="text-cyan-400">Mind</span>
+        <span className={`font-bold text-slate-900 dark:text-slate-100 ${currentTextSize}`}>
+          Legal<span className="text-blue-600 dark:text-sky-400">Mind</span>
         </span>
         <span
-          className={`font-mono font-semibold rounded-md bg-gradient-to-r from-cyan-500/20 to-indigo-500/20 border border-cyan-500/30 text-cyan-300 shadow-sm ${currentBadgeSize}`}
+          className={`font-mono font-semibold rounded-md bg-blue-100 dark:bg-sky-500/20 border border-blue-200 dark:border-sky-500/30 text-blue-700 dark:text-sky-300 shadow-sm ${currentBadgeSize}`}
         >
           AI
         </span>
       </div>
       {subtitle && (
-        <span className="text-[11px] font-mono text-slate-400 tracking-wider uppercase mt-0.5">
+        <span className="text-[11px] font-mono text-slate-500 dark:text-slate-400 tracking-wider uppercase mt-0.5">
           Legal Document Intelligence
         </span>
       )}

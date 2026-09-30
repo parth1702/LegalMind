@@ -29,14 +29,14 @@ const getTransporter = () => {
 
 /**
  * Dispatch contact inquiry emails:
- * 1. Admin Alert Email -> Sent TO nainil9845patel@gmail.com
+ * 1. Admin Alert Email -> Sent TO legalmind@co.in
  * 2. User Confirmation Email -> Sent TO submitter's email address
  */
 const sendContactEmails = async ({ ticketId, name, email, phone, subject, category, preferredContact, message }) => {
-  const adminEmail = process.env.SUPPORT_EMAIL || 'nainil9845patel@gmail.com';
+  const adminEmail = process.env.SUPPORT_EMAIL || 'legalmind@co.in';
   const transporter = getTransporter();
 
-  // Email 1: Notification sent TO ADMIN (nainil9845patel@gmail.com)
+  // Email 1: Notification sent TO ADMIN (legalmind@co.in)
   const adminAlertContent = {
     from: `"LegalMind AI Portal" <${adminEmail}>`,
     to: adminEmail,

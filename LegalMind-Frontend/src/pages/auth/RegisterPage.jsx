@@ -82,27 +82,27 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="card-elevated p-6 sm:p-8 space-y-6 bg-[#0b1021]/90 border-slate-800 shadow-2xl">
+    <div className="card-elevated p-6 sm:p-8 space-y-6 bg-white dark:bg-card border-slate-200 dark:border-slate-800 shadow-xl">
       {/* Header */}
       <div className="space-y-1 text-center sm:text-left">
-        <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-100">
+        <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-100">
           Create Counsel Account
         </h2>
-        <p className="text-xs text-slate-400">
+        <p className="text-xs text-slate-500 dark:text-slate-400">
           Set up institutional access for LegalMind AI document intelligence.
         </p>
       </div>
 
       {registerError && (
         <div className="alert alert-error animate-in fade-in duration-200">
-          <AlertCircle className="w-4 h-4 text-rose-400 shrink-0 mt-0.5" />
+          <AlertCircle className="w-4 h-4 text-rose-500 shrink-0 mt-0.5" />
           <span className="text-xs">{registerError}</span>
         </div>
       )}
 
       {registerSuccess && (
         <div className="alert alert-success animate-in fade-in duration-200">
-          <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+          <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
           <span className="text-xs font-medium">Account created! Redirecting to Home...</span>
         </div>
       )}
@@ -111,11 +111,11 @@ export default function RegisterPage() {
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4" noValidate>
         {/* Name Field */}
         <div className="space-y-1.5">
-          <label htmlFor="name" className="block text-xs font-medium text-slate-300">
+          <label htmlFor="name" className="block text-xs font-medium text-slate-700 dark:text-slate-300">
             Full Name
           </label>
           <div className="relative">
-            <User className="w-4 h-4 text-slate-500 absolute left-3 top-3" />
+            <User className="w-4 h-4 text-slate-400 absolute left-3 top-3" />
             <input
               id="name"
               type="text"
@@ -126,17 +126,17 @@ export default function RegisterPage() {
             />
           </div>
           {errors.name && (
-            <p className="text-[11px] text-rose-400 font-mono mt-1">{errors.name.message}</p>
+            <p className="text-[11px] text-rose-500 font-mono mt-1">{errors.name.message}</p>
           )}
         </div>
 
         {/* Email Field */}
         <div className="space-y-1.5">
-          <label htmlFor="email" className="block text-xs font-medium text-slate-300">
+          <label htmlFor="email" className="block text-xs font-medium text-slate-700 dark:text-slate-300">
             Work Email Address
           </label>
           <div className="relative">
-            <Mail className="w-4 h-4 text-slate-500 absolute left-3 top-3" />
+            <Mail className="w-4 h-4 text-slate-400 absolute left-3 top-3" />
             <input
               id="email"
               type="email"
@@ -147,17 +147,17 @@ export default function RegisterPage() {
             />
           </div>
           {errors.email && (
-            <p className="text-[11px] text-rose-400 font-mono mt-1">{errors.email.message}</p>
+            <p className="text-[11px] text-rose-500 font-mono mt-1">{errors.email.message}</p>
           )}
         </div>
 
         {/* Password Field */}
         <div className="space-y-1.5">
-          <label htmlFor="password" className="block text-xs font-medium text-slate-300">
+          <label htmlFor="password" className="block text-xs font-medium text-slate-700 dark:text-slate-300">
             Password
           </label>
           <div className="relative">
-            <Lock className="w-4 h-4 text-slate-500 absolute left-3 top-3" />
+            <Lock className="w-4 h-4 text-slate-400 absolute left-3 top-3" />
             <input
               id="password"
               type={showPassword ? 'text' : 'password'}
@@ -169,14 +169,14 @@ export default function RegisterPage() {
             <button
               type="button"
               onClick={() => setShowPassword((prev) => !prev)}
-              className="absolute right-3 top-2.5 text-slate-400 hover:text-slate-200 transition-colors"
+              className="absolute right-3 top-2.5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors"
               aria-label={showPassword ? 'Hide password' : 'Show password'}
             >
               {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
             </button>
           </div>
           {errors.password && (
-            <p className="text-[11px] text-rose-400 font-mono mt-1">{errors.password.message}</p>
+            <p className="text-[11px] text-rose-500 font-mono mt-1">{errors.password.message}</p>
           )}
           {/* Password Strength Meter */}
           <PasswordStrengthMeter password={passwordValue} />
@@ -184,11 +184,11 @@ export default function RegisterPage() {
 
         {/* Confirm Password Field */}
         <div className="space-y-1.5">
-          <label htmlFor="confirmPassword" className="block text-xs font-medium text-slate-300">
+          <label htmlFor="confirmPassword" className="block text-xs font-medium text-slate-700 dark:text-slate-300">
             Confirm Password
           </label>
           <div className="relative">
-            <Lock className="w-4 h-4 text-slate-500 absolute left-3 top-3" />
+            <Lock className="w-4 h-4 text-slate-400 absolute left-3 top-3" />
             <input
               id="confirmPassword"
               type={showConfirmPassword ? 'text' : 'password'}
@@ -200,33 +200,33 @@ export default function RegisterPage() {
             <button
               type="button"
               onClick={() => setShowConfirmPassword((prev) => !prev)}
-              className="absolute right-3 top-2.5 text-slate-400 hover:text-slate-200 transition-colors"
+              className="absolute right-3 top-2.5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors"
               aria-label={showConfirmPassword ? 'Hide confirm password' : 'Show confirm password'}
             >
               {showConfirmPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
             </button>
           </div>
           {errors.confirmPassword && (
-            <p className="text-[11px] text-rose-400 font-mono mt-1">{errors.confirmPassword.message}</p>
+            <p className="text-[11px] text-rose-500 font-mono mt-1">{errors.confirmPassword.message}</p>
           )}
         </div>
 
         {/* Terms Acceptance Checkbox */}
         <div className="space-y-1 pt-1">
-          <label className="flex items-start gap-2.5 text-xs text-slate-300 cursor-pointer select-none">
+          <label className="flex items-start gap-2.5 text-xs text-slate-600 dark:text-slate-300 cursor-pointer select-none">
             <input
               type="checkbox"
-              className="w-4 h-4 mt-0.5 rounded border-slate-700 bg-slate-900 text-cyan-500 focus:ring-cyan-400 focus:ring-offset-slate-950 shrink-0"
+              className="w-4 h-4 mt-0.5 rounded border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 text-blue-600 focus:ring-blue-500 shrink-0"
               {...register('termsAccepted')}
               disabled={isLoading || registerSuccess}
             />
             <span className="leading-snug">
-              I agree to the <span className="text-cyan-400 font-medium">Terms of Service</span> and{' '}
-              <span className="text-cyan-400 font-medium">Privacy Policy</span>.
+              I agree to the <span className="text-blue-600 font-medium">Terms of Service</span> and{' '}
+              <span className="text-blue-600 font-medium">Privacy Policy</span>.
             </span>
           </label>
           {errors.termsAccepted && (
-            <p className="text-[11px] text-rose-400 font-mono">{errors.termsAccepted.message}</p>
+            <p className="text-[11px] text-rose-500 font-mono">{errors.termsAccepted.message}</p>
           )}
         </div>
 
@@ -234,7 +234,7 @@ export default function RegisterPage() {
         <button
           type="submit"
           disabled={isLoading || registerSuccess}
-          className="btn btn-primary btn-md w-full justify-center shadow-lg shadow-cyan-500/20 mt-2"
+          className="btn btn-primary btn-md w-full justify-center mt-2 shadow-sm"
         >
           {isLoading ? (
             <>
@@ -256,10 +256,10 @@ export default function RegisterPage() {
       </form>
 
       {/* Footer Link */}
-      <div className="text-center pt-2 border-t border-slate-800/80">
-        <p className="text-xs text-slate-400">
+      <div className="text-center pt-2 border-t border-slate-200 dark:border-slate-800">
+        <p className="text-xs text-slate-500 dark:text-slate-400">
           Already have an account?{' '}
-          <Link to="/auth/login" className="font-semibold text-cyan-400 hover:text-cyan-300 transition-colors">
+          <Link to="/auth/login" className="font-semibold text-blue-600 hover:text-blue-700 dark:text-blue-400 transition-colors">
             Sign In
           </Link>
         </p>

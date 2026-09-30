@@ -94,7 +94,7 @@ export default function AccountSettingsTab({ onShowToast }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="card-base p-6 border-slate-800 space-y-6 bg-[#0b1021]/90">
+    <form onSubmit={handleSubmit} className="card-base p-6 space-y-6">
       <input
         type="file"
         ref={fileInputRef}
@@ -103,16 +103,16 @@ export default function AccountSettingsTab({ onShowToast }) {
         className="hidden"
       />
 
-      <div className="flex items-center justify-between border-b border-slate-800 pb-3">
-        <h3 className="text-sm font-bold text-slate-100 uppercase tracking-wider font-mono">
+      <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3">
+        <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 uppercase tracking-wider font-mono">
           Account & Counsel Profile
         </h3>
         <span className="badge badge-ai text-[10px]">Enterprise Account</span>
       </div>
 
       {/* Avatar Management Row */}
-      <div className="p-4 rounded-2xl bg-slate-900/60 border border-slate-800 flex flex-col sm:flex-row items-center gap-4">
-        <div className="w-16 h-16 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 font-bold text-lg font-mono overflow-hidden shrink-0 shadow-inner">
+      <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row items-center gap-4">
+        <div className="w-16 h-16 rounded-xl bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/30 flex items-center justify-center text-blue-600 dark:text-blue-400 font-bold text-lg font-mono overflow-hidden shrink-0 shadow-inner">
           {user?.avatar ? (
             <img src={user.avatar} alt="Avatar" className="w-full h-full object-cover" />
           ) : (
@@ -121,8 +121,8 @@ export default function AccountSettingsTab({ onShowToast }) {
         </div>
 
         <div className="space-y-1 text-center sm:text-left flex-1">
-          <div className="text-xs font-bold text-slate-200">Profile Picture</div>
-          <p className="text-[11px] text-slate-400">
+          <div className="text-xs font-bold text-slate-800 dark:text-slate-200">Profile Picture</div>
+          <p className="text-[11px] text-slate-500 dark:text-slate-400">
             Upload a custom avatar (PNG, JPG or WEBP, max 5MB).
           </p>
         </div>
@@ -152,7 +152,7 @@ export default function AccountSettingsTab({ onShowToast }) {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {/* Full Name */}
         <div className="space-y-1.5">
-          <label className="block text-xs font-medium text-slate-300">Full Name</label>
+          <label className="block text-xs font-medium text-slate-600 dark:text-slate-300">Full Name</label>
           <div className="relative">
             <User className="w-4 h-4 text-slate-500 absolute left-3 top-3" />
             <input
@@ -167,7 +167,7 @@ export default function AccountSettingsTab({ onShowToast }) {
 
         {/* Email Address */}
         <div className="space-y-1.5">
-          <label className="block text-xs font-medium text-slate-300">Work Email Address</label>
+          <label className="block text-xs font-medium text-slate-600 dark:text-slate-300">Work Email Address</label>
           <div className="relative">
             <Mail className="w-4 h-4 text-slate-500 absolute left-3 top-3" />
             <input
@@ -182,7 +182,7 @@ export default function AccountSettingsTab({ onShowToast }) {
 
         {/* Organization */}
         <div className="space-y-1.5">
-          <label className="block text-xs font-medium text-slate-300">Organization</label>
+          <label className="block text-xs font-medium text-slate-600 dark:text-slate-300">Organization</label>
           <div className="relative">
             <Building className="w-4 h-4 text-slate-500 absolute left-3 top-3" />
             <input
@@ -197,7 +197,7 @@ export default function AccountSettingsTab({ onShowToast }) {
 
         {/* Job Title */}
         <div className="space-y-1.5">
-          <label className="block text-xs font-medium text-slate-300">Job Title / Role</label>
+          <label className="block text-xs font-medium text-slate-600 dark:text-slate-300">Job Title / Role</label>
           <div className="relative">
             <Briefcase className="w-4 h-4 text-slate-500 absolute left-3 top-3" />
             <input
@@ -212,7 +212,7 @@ export default function AccountSettingsTab({ onShowToast }) {
 
         {/* Timezone */}
         <div className="space-y-1.5 sm:col-span-2">
-          <label className="block text-xs font-medium text-slate-300">Timezone Preference</label>
+          <label className="block text-xs font-medium text-slate-600 dark:text-slate-300">Timezone Preference</label>
           <div className="relative">
             <Globe className="w-4 h-4 text-slate-500 absolute left-3 top-3" />
             <select
@@ -230,8 +230,8 @@ export default function AccountSettingsTab({ onShowToast }) {
         </div>
       </div>
 
-      <div className="pt-4 border-t border-slate-800 flex justify-end">
-        <button type="submit" className="btn btn-primary btn-md shadow-lg shadow-cyan-500/20">
+      <div className="pt-4 border-t border-slate-200 dark:border-slate-800 flex justify-end">
+        <button type="submit" className="btn btn-primary btn-md">
           <Save className="w-4 h-4" />
           <span>Save Account Settings</span>
         </button>

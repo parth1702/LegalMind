@@ -1,85 +1,111 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, ShieldCheck, Sparkles, FileText, CheckCircle2, Lock, LogOut } from 'lucide-react';
+import { ArrowRight, FileText, CheckCircle2, Lock } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 
 export default function HeroSection() {
-  const { isAuthenticated, logout } = useAuth();
+  const { isAuthenticated } = useAuth();
 
   return (
-    <section className="relative pt-12 sm:pt-20 pb-16 sm:pb-24 overflow-hidden">
-      {/* Ambient background lighting */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-cyan-500/10 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute top-1/3 right-10 w-[400px] h-[300px] bg-indigo-500/10 rounded-full blur-[100px] pointer-events-none" />
+    <section className="relative bg-gradient-to-b from-slate-50 to-white dark:from-[#090d16] dark:to-[#090d16] pt-16 sm:pt-24 pb-20 sm:pb-32 border-b border-slate-200 dark:border-slate-800/80">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          {/* Left Column — Text */}
+          <div className="space-y-6">
+            {/* Product Badge */}
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-50 dark:bg-slate-800/80 border border-blue-200 dark:border-slate-700 text-blue-700 dark:text-sky-400 text-xs font-medium">
+              <span className="w-1.5 h-1.5 rounded-full bg-blue-600 dark:bg-sky-400 animate-pulse" />
+              AI Powered Legal Analysis
+            </div>
 
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 space-y-8">
+            {/* Headline */}
+            <div className="space-y-2">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-slate-100 leading-[1.1]">
+                Understand Legal Documents
+              </h1>
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-blue-600 dark:text-sky-400 leading-[1.1]">
+                In Minutes, Not Hours.
+              </h1>
+            </div>
 
-        {/* Main Headline */}
-        <div className="space-y-4 max-w-4xl mx-auto">
-          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-slate-100 leading-[1.15]">
-            AI-Powered Legal Document <span className="bg-gradient-to-r from-cyan-400 via-brand-300 to-indigo-400 bg-clip-text text-transparent">Understanding & Intelligence</span>
-          </h1>
+            {/* Sub-text */}
+            <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 max-w-xl leading-relaxed">
+              Upload contracts, agreements, and policies. Get AI-powered summaries, detect risky clauses, and chat with your documents instantly.
+            </p>
 
-          <p className="text-base sm:text-xl text-slate-300 max-w-3xl mx-auto font-normal leading-relaxed">
-            Upload complex legal agreements, extract critical clauses automatically, detect compliance risks with precision, and interrogate contracts using an interactive AI legal co-pilot.
-          </p>
-        </div>
-
-        {/* CTA Buttons */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
-          <Link
-            to={isAuthenticated ? "/app/documents" : "/auth/login"}
-            className="btn btn-primary btn-lg w-full sm:w-auto shadow-lg shadow-cyan-500/20"
-          >
-            <Sparkles className="w-5 h-5" />
-            <span>Analyze a Document</span>
-            <ArrowRight className="w-5 h-5" />
-          </Link>
-
-          {isAuthenticated ? (
-            <>
-              <Link to="/app/dashboard" className="btn btn-secondary btn-lg w-full sm:w-auto font-semibold text-cyan-300">
-                <span>Go to Console</span>
-              </Link>
-              <button
-                type="button"
-                onClick={logout}
-                className="btn btn-ghost btn-lg w-full sm:w-auto text-rose-400 hover:text-rose-300 hover:bg-rose-500/10 flex items-center justify-center gap-2"
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row items-start gap-3 pt-2">
+              <Link
+                to={isAuthenticated ? '/app/documents' : '/auth/login'}
+                className="btn btn-primary btn-lg w-full sm:w-auto"
               >
-                <LogOut className="w-5 h-5" />
-                <span>Log Out</span>
-              </button>
-            </>
-          ) : (
-            <>
-              <Link to="/auth/login" className="btn btn-secondary btn-lg w-full sm:w-auto">
-                <span>Log In</span>
+                <FileText className="w-4 h-4" />
+                <span>Get Started</span>
+                <ArrowRight className="w-4 h-4" />
               </Link>
 
-              <Link to="/auth/register" className="btn btn-outline btn-lg w-full sm:w-auto">
-                <span>Sign Up / Create Account</span>
-              </Link>
-            </>
-          )}
-        </div>
+              {isAuthenticated ? (
+                <Link to="/app/dashboard" className="btn btn-outline btn-lg w-full sm:w-auto">
+                  <span>Go to Console</span>
+                </Link>
+              ) : (
+                <Link to="/auth/login" className="btn btn-outline btn-lg w-full sm:w-auto">
+                  <span>Learn More</span>
+                </Link>
+              )}
+            </div>
 
-        {/* Core Value Micro-Pill List */}
-        <div className="pt-8 border-t border-slate-800/80 flex flex-wrap items-center justify-center gap-6 text-xs text-slate-400 font-medium">
-          <div className="flex items-center gap-2">
-            <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-            <span>Instant Clause Extraction</span>
+            {/* Trust pills */}
+            <div className="flex flex-wrap items-center gap-4 text-xs text-slate-500 dark:text-slate-400 pt-2">
+              <div className="flex items-center gap-1.5">
+                <CheckCircle2 className="w-4 h-4 text-green-500" />
+                <span>Automated Clause Extraction</span>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <CheckCircle2 className="w-4 h-4 text-blue-500" />
+                <span>4-Tier Risk Scoring</span>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <CheckCircle2 className="w-4 h-4 text-blue-500" />
+                <span>RAG Legal Co-Pilot</span>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <Lock className="w-4 h-4 text-slate-400" />
+                <span>Enterprise Encrypted</span>
+              </div>
+            </div>
           </div>
-          <div className="flex items-center gap-2">
-            <CheckCircle2 className="w-4 h-4 text-cyan-400" />
-            <span>4-Tier Risk Assessment</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <CheckCircle2 className="w-4 h-4 text-indigo-400" />
-            <span>Conversational AI Co-Pilot</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <Lock className="w-4 h-4 text-slate-400" />
-            <span>Enterprise-Grade Encryption</span>
+
+          {/* Right Column — Document Preview Card */}
+          <div className="relative hidden lg:flex justify-center">
+            {/* Main card */}
+            <div className="w-full max-w-sm bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-2xl shadow-xl p-5 space-y-3">
+              <div className="flex items-start gap-3 pb-3 border-b border-slate-100 dark:border-slate-800">
+                <div className="w-8 h-10 bg-blue-50 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-800/40 rounded flex items-center justify-center shrink-0">
+                  <FileText className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                </div>
+                <div>
+                  <p className="text-sm font-semibold text-slate-900 dark:text-slate-100">Employment Contract.pdf</p>
+                  <p className="text-xs text-slate-500 dark:text-slate-400">AI Analysis Complete</p>
+                </div>
+              </div>
+
+              <div className="bg-green-50 dark:bg-green-950/30 border border-green-200 dark:border-green-800/40 rounded-lg px-3 py-2 flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-green-600 dark:text-green-400 shrink-0" />
+                <span className="text-xs font-medium text-green-700 dark:text-green-300">Risk Score: Low</span>
+              </div>
+
+              <div className="bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-800/40 rounded-lg px-3 py-2 flex items-center gap-2">
+                <FileText className="w-4 h-4 text-blue-600 dark:text-blue-400 shrink-0" />
+                <span className="text-xs font-medium text-blue-700 dark:text-blue-300">Summary Generated</span>
+              </div>
+
+              {/* Floating warning badge */}
+              <div className="absolute -bottom-4 -left-4 bg-amber-50 dark:bg-amber-950/60 border border-amber-200 dark:border-amber-700/50 rounded-xl px-3.5 py-2 flex items-center gap-2 shadow-md">
+                <span className="text-base">⚠️</span>
+                <span className="text-xs font-semibold text-amber-800 dark:text-amber-300">3 Risky Clauses Found</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>

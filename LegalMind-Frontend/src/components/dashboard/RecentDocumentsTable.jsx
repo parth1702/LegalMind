@@ -7,25 +7,25 @@ const riskConfig = {
     badge: 'badge-low',
     icon: CheckCircle2,
     text: 'Low Risk',
-    color: 'text-emerald-400',
+    color: 'text-emerald-600 dark:text-emerald-400',
   },
   medium: {
     badge: 'badge-medium',
     icon: AlertCircle,
     text: 'Medium Risk',
-    color: 'text-amber-400',
+    color: 'text-amber-600 dark:text-amber-400',
   },
   high: {
     badge: 'badge-high',
     icon: AlertTriangle,
     text: 'High Risk',
-    color: 'text-rose-400',
+    color: 'text-rose-600 dark:text-rose-400',
   },
   critical: {
     badge: 'badge-critical',
     icon: ShieldAlert,
     text: 'Critical Risk',
-    color: 'text-red-400',
+    color: 'text-red-600 dark:text-red-400',
   },
 };
 
@@ -33,17 +33,17 @@ export default function RecentDocumentsTable({ documents }) {
   if (!documents || documents.length === 0) return null;
 
   return (
-    <div className="card-base p-5 space-y-4 border-slate-800">
-      <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+    <div className="card-base p-5 space-y-4 bg-white dark:bg-card border-slate-200 dark:border-slate-800 shadow-sm">
+      <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3">
         <div>
-          <h3 className="text-sm font-bold text-slate-100 uppercase tracking-wider font-mono">
+          <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 uppercase tracking-wider font-mono">
             Recent Contract Reviews
           </h3>
-          <p className="text-[11px] text-slate-400">Latest parsed agreements and clause risk scores</p>
+          <p className="text-[11px] text-slate-500 dark:text-slate-400">Latest parsed agreements and clause risk scores</p>
         </div>
         <Link
           to="/app/documents"
-          className="text-xs font-mono text-cyan-400 hover:text-cyan-300 transition-colors flex items-center gap-1"
+          className="text-xs font-mono text-blue-600 hover:text-blue-700 dark:text-blue-400 transition-colors flex items-center gap-1"
         >
           <span>View All Documents</span>
           <ArrowRight className="w-3.5 h-3.5" />
@@ -54,7 +54,7 @@ export default function RecentDocumentsTable({ documents }) {
       <div className="overflow-x-auto">
         <table className="w-full text-left border-collapse">
           <thead>
-            <tr className="border-b border-slate-800 text-[11px] font-mono text-slate-400 uppercase tracking-wider">
+            <tr className="border-b border-slate-200 dark:border-slate-800 text-[11px] font-mono text-slate-500 dark:text-slate-400 uppercase tracking-wider">
               <th className="py-2.5 px-3">Document Name</th>
               <th className="py-2.5 px-3">Agreement Type</th>
               <th className="py-2.5 px-3">Risk Assessment</th>
@@ -63,28 +63,28 @@ export default function RecentDocumentsTable({ documents }) {
               <th className="py-2.5 px-3 text-right">Actions</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-slate-800/60 text-xs">
+          <tbody className="divide-y divide-slate-100 dark:divide-slate-800/60 text-xs">
             {documents.map((doc) => {
               const riskKey = (doc.riskLevel || 'low').toLowerCase();
               const risk = riskConfig[riskKey] || riskConfig.low;
               const RiskIcon = risk.icon;
 
               return (
-                <tr key={doc.id} className="hover:bg-slate-900/50 transition-colors group">
+                <tr key={doc.id} className="hover:bg-slate-50 dark:hover:bg-slate-900/50 transition-colors group">
                   {/* Document Name */}
-                  <td className="py-3 px-3 font-semibold text-slate-200">
+                  <td className="py-3 px-3 font-semibold text-slate-900 dark:text-slate-200">
                     <div className="flex items-center gap-2.5">
-                      <div className="p-1.5 rounded-lg bg-slate-900 border border-slate-800 text-cyan-400 shrink-0">
+                      <div className="p-1.5 rounded-lg bg-blue-50 dark:bg-slate-900 border border-blue-200 dark:border-slate-800 text-blue-600 dark:text-blue-400 shrink-0">
                         <FileText className="w-4 h-4" />
                       </div>
-                      <span className="truncate max-w-[200px] sm:max-w-[260px] group-hover:text-cyan-300 transition-colors">
+                      <span className="truncate max-w-[200px] sm:max-w-[260px] group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                         {doc.name}
                       </span>
                     </div>
                   </td>
 
                   {/* Agreement Type */}
-                  <td className="py-3 px-3 text-slate-400 font-mono text-[11px]">
+                  <td className="py-3 px-3 text-slate-500 dark:text-slate-400 font-mono text-[11px]">
                     {doc.type}
                   </td>
 
@@ -99,21 +99,21 @@ export default function RecentDocumentsTable({ documents }) {
                   {/* Risk Score Progress Bar */}
                   <td className="py-3 px-3">
                     <div className="w-24 space-y-1">
-                      <div className="flex justify-between text-[10px] font-mono text-slate-400">
+                      <div className="flex justify-between text-[10px] font-mono text-slate-500 dark:text-slate-400">
                         <span>Score</span>
                         <span className={`font-semibold ${risk.color}`}>{doc.riskScore}%</span>
                       </div>
-                      <div className="progress-container h-1.5">
+                      <div className="progress-container h-1.5 bg-slate-100 dark:bg-slate-800">
                         <div
                           className="h-full rounded-full transition-all"
-                          style={{ width: `${doc.riskScore}%`, backgroundColor: doc.riskScore > 70 ? '#f43f5e' : doc.riskScore > 40 ? '#f59e0b' : '#10b981' }}
+                          style={{ width: `${doc.riskScore}%`, backgroundColor: doc.riskScore > 70 ? '#ef4444' : doc.riskScore > 40 ? '#f59e0b' : '#10b981' }}
                         />
                       </div>
                     </div>
                   </td>
 
                   {/* Upload Date */}
-                  <td className="py-3 px-3 font-mono text-[11px] text-slate-400">
+                  <td className="py-3 px-3 font-mono text-[11px] text-slate-500 dark:text-slate-400">
                     {doc.date}
                   </td>
 
@@ -122,14 +122,14 @@ export default function RecentDocumentsTable({ documents }) {
                     <div className="flex items-center justify-end gap-1">
                       <Link
                         to="/app/analysis"
-                        className="p-1.5 rounded-lg text-slate-400 hover:text-cyan-300 hover:bg-slate-800 transition-colors"
+                        className="p-1.5 rounded-lg text-slate-400 hover:text-blue-600 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
                         title="View Risk Analysis"
                       >
                         <Eye className="w-4 h-4" />
                       </Link>
                       <button
                         type="button"
-                        className="p-1.5 rounded-lg text-slate-400 hover:text-slate-200 hover:bg-slate-800 transition-colors"
+                        className="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
                         title="More options"
                       >
                         <MoreVertical className="w-4 h-4" />

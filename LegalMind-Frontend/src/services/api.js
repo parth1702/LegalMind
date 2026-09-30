@@ -14,6 +14,15 @@ export const apiClient = axios.create({
 apiClient.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('legalmind_token');
+
+    // Guard: never forward fake offline tokens — they cause "jwt malformed" on the backend.
+    // Any stale demo_token_* values are cleaned up here automatically.
+    if (token && token.startsWith('demo_token_')) {
+      console.warn('[API] Detected stale offline demo token in storage, removing it to prevent jwt malformed errors.');
+      localStorage.removeItem('legalmind_token');
+      return config;
+    }
+
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }

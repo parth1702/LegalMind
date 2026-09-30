@@ -20,17 +20,17 @@ export default function AiAssistantShortcut() {
   };
 
   return (
-    <div className="card-base p-5 space-y-4 border-slate-800 bg-gradient-to-br from-[#0b1021] to-[#070b18]">
-      <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+    <div className="card-base p-5 space-y-4 border-slate-200 dark:border-slate-800 bg-white dark:bg-card shadow-sm">
+      <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3">
         <div className="flex items-center gap-2">
-          <div className="p-1.5 rounded-lg bg-cyan-500/10 border border-cyan-500/30 text-cyan-400">
+          <div className="p-1.5 rounded-lg bg-blue-50 dark:bg-cyan-500/10 border border-blue-200 dark:border-cyan-500/30 text-blue-600 dark:text-cyan-400">
             <Sparkles className="w-4 h-4" />
           </div>
           <div>
-            <h3 className="text-sm font-bold text-slate-100 uppercase tracking-wider font-mono">
+            <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 uppercase tracking-wider font-mono">
               AI Legal Co-Pilot Shortcut
             </h3>
-            <p className="text-[11px] text-slate-400">Ask natural language questions across your active repository</p>
+            <p className="text-[11px] text-slate-500 dark:text-slate-400">Ask natural language questions across your active repository</p>
           </div>
         </div>
         <span className="badge badge-ai">Active Co-Pilot</span>
@@ -47,7 +47,7 @@ export default function AiAssistantShortcut() {
         />
         <button
           type="submit"
-          className="absolute right-2 top-2 p-1.5 rounded-lg bg-cyan-500 text-slate-950 hover:bg-cyan-400 transition-colors"
+          className="absolute right-2 top-2 p-1.5 rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition-colors shadow-sm"
           aria-label="Send query to AI Assistant"
         >
           <Send className="w-3.5 h-3.5" />
@@ -68,7 +68,7 @@ export default function AiAssistantShortcut() {
                 setQuery(prompt);
                 navigate('/app/assistant');
               }}
-              className="px-2.5 py-1 rounded-lg bg-slate-900/80 border border-slate-800 text-[11px] text-slate-300 hover:text-cyan-300 hover:border-cyan-500/40 transition-colors text-left font-mono"
+              className="px-2.5 py-1 rounded-lg bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 text-[11px] text-slate-700 dark:text-slate-300 hover:text-blue-600 dark:hover:text-cyan-300 hover:border-blue-300 dark:hover:border-cyan-500/40 transition-colors text-left font-mono"
             >
               "{prompt}"
             </button>

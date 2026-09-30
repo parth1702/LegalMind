@@ -30,11 +30,11 @@ export default function SecuritySettingsTab({ onShowToast, onOpenConfirmModal })
   return (
     <div className="space-y-6">
       {/* Change Password Card */}
-      <form onSubmit={handlePasswordSubmit} className="card-base p-6 border-slate-800 space-y-4 bg-[#0b1021]/90">
-        <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+      <form onSubmit={handlePasswordSubmit} className="card-base p-6 space-y-4">
+        <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3">
           <div className="flex items-center gap-2">
-            <Lock className="w-5 h-5 text-cyan-400" />
-            <h3 className="text-sm font-bold text-slate-100 uppercase tracking-wider font-mono">
+            <Lock className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+            <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 uppercase tracking-wider font-mono">
               Change Security Password
             </h3>
           </div>
@@ -43,7 +43,7 @@ export default function SecuritySettingsTab({ onShowToast, onOpenConfirmModal })
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div className="space-y-1.5">
-            <label className="block text-xs font-medium text-slate-300">Current Password</label>
+            <label className="block text-xs font-medium text-slate-600 dark:text-slate-300">Current Password</label>
             <div className="relative">
               <input
                 type={showCurrent ? 'text' : 'password'}
@@ -63,7 +63,7 @@ export default function SecuritySettingsTab({ onShowToast, onOpenConfirmModal })
           </div>
 
           <div className="space-y-1.5">
-            <label className="block text-xs font-medium text-slate-300">New Password</label>
+            <label className="block text-xs font-medium text-slate-600 dark:text-slate-300">New Password</label>
             <div className="relative">
               <input
                 type={showNew ? 'text' : 'password'}
@@ -83,7 +83,7 @@ export default function SecuritySettingsTab({ onShowToast, onOpenConfirmModal })
           </div>
 
           <div className="space-y-1.5">
-            <label className="block text-xs font-medium text-slate-300">Confirm New Password</label>
+            <label className="block text-xs font-medium text-slate-600 dark:text-slate-300">Confirm New Password</label>
             <input
               type="password"
               value={passwords.confirm}
@@ -102,11 +102,11 @@ export default function SecuritySettingsTab({ onShowToast, onOpenConfirmModal })
       </form>
 
       {/* Active Sessions Card */}
-      <div className="card-base p-6 border-slate-800 space-y-4 bg-[#0b1021]/90">
-        <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+      <div className="card-base p-6 space-y-4">
+        <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3">
           <div className="flex items-center gap-2">
-            <Laptop className="w-5 h-5 text-indigo-400" />
-            <h3 className="text-sm font-bold text-slate-100 uppercase tracking-wider font-mono">
+            <Laptop className="w-5 h-5 text-indigo-500 dark:text-indigo-400" />
+            <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 uppercase tracking-wider font-mono">
               Active Authorized Sessions
             </h3>
           </div>
@@ -125,14 +125,14 @@ export default function SecuritySettingsTab({ onShowToast, onOpenConfirmModal })
           {mockSessions.map((s) => (
             <div
               key={s.id}
-              className="p-3.5 rounded-xl bg-slate-900/80 border border-slate-800 flex items-center justify-between text-xs"
+              className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 flex items-center justify-between text-xs"
             >
               <div className="flex items-center gap-3">
-                <div className="p-2 rounded-lg bg-slate-950 border border-slate-800 text-cyan-400">
+                <div className="p-2 rounded-lg bg-blue-50 dark:bg-slate-950 border border-blue-200 dark:border-slate-800 text-blue-600 dark:text-blue-400">
                   {s.device.includes('iPhone') ? <Smartphone className="w-4 h-4" /> : <Laptop className="w-4 h-4" />}
                 </div>
                 <div>
-                  <div className="font-bold text-slate-200 flex items-center gap-2">
+                  <div className="font-bold text-slate-800 dark:text-slate-200 flex items-center gap-2">
                     <span>{s.device}</span>
                     {s.current && <span className="badge badge-low text-[9px]">Current Device</span>}
                   </div>
@@ -157,27 +157,27 @@ export default function SecuritySettingsTab({ onShowToast, onOpenConfirmModal })
       </div>
 
       {/* Login Activity Stream */}
-      <div className="card-base p-6 border-slate-800 space-y-3 bg-[#0b1021]/90">
-        <span className="text-xs font-mono font-bold text-slate-300 uppercase tracking-wider block">
+      <div className="card-base p-6 space-y-3">
+        <span className="text-xs font-mono font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider block">
           Recent Security Audit Logs
         </span>
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs border-collapse">
             <thead>
-              <tr className="border-b border-slate-800 text-[10px] font-mono text-slate-500 uppercase">
+              <tr className="border-b border-slate-200 dark:border-slate-800 text-[10px] font-mono text-slate-500 dark:text-slate-400 uppercase">
                 <th className="py-2 px-3">Timestamp</th>
                 <th className="py-2 px-3">Device / Client</th>
                 <th className="py-2 px-3">IP Address</th>
                 <th className="py-2 px-3 text-right">Status</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-800/60 font-mono text-[11px]">
+            <tbody className="divide-y divide-slate-200 dark:divide-slate-800/60 font-mono text-[11px]">
               {mockLoginActivity.map((log) => (
-                <tr key={log.id} className="hover:bg-slate-900/40">
+                <tr key={log.id} className="hover:bg-slate-50 dark:hover:bg-slate-900/40">
                   <td className="py-2 px-3 text-slate-400">{log.timestamp}</td>
-                  <td className="py-2 px-3 text-slate-200">{log.device}</td>
+                  <td className="py-2 px-3 text-slate-700 dark:text-slate-200">{log.device}</td>
                   <td className="py-2 px-3 text-slate-400">{log.ip}</td>
-                  <td className="py-2 px-3 text-right text-emerald-400 font-semibold">{log.status}</td>
+                  <td className="py-2 px-3 text-right text-emerald-600 dark:text-emerald-400 font-semibold">{log.status}</td>
                 </tr>
               ))}
             </tbody>
