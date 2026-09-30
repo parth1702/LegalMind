@@ -32,25 +32,18 @@ connectDB().then(() => {
   seedAdmin();
 });
 
-// --- CORS: Support single or comma-separated origins ---
-// Example: CORS_ORIGIN=https://legalmind.vercel.app,https://legalmind-api.koyeb.app
-const rawOrigin = process.env.CORS_ORIGIN || '*';
-const allowedOrigins =
-  rawOrigin === '*' ? '*' : rawOrigin.split(',').map((o) => o.trim());
-
 // Security & CORS Middleware
 app.use(securityHeaders);
 app.use(
   cors({
-    origin: allowedOrigins,
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+    origin: process.env.CORS_ORIGIN || '*',
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials: allowedOrigins !== '*',
   })
 );
 
 // Body Parsing Middleware
-app.use(express.json({ limit: '10mb' }));
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Serve static uploads directory
@@ -73,7 +66,6 @@ app.get('/', (req, res) => {
   res.json({
     message: 'LegalMind AI Backend API Operating',
     health: '/api/health',
-    environment: process.env.NODE_ENV || 'development',
   });
 });
 
@@ -81,39 +73,19 @@ app.get('/', (req, res) => {
 app.use(notFound);
 app.use(errorHandler);
 
-// Start Express Server — bind to 0.0.0.0 so Koyeb can route traffic
+// Start Express Server
 const PORT = process.env.PORT || 5000;
-const server = app.listen(PORT, '0.0.0.0', () => {
+const server = app.listen(PORT, () => {
   console.log(
-    `[Server] LegalMind Backend running on port ${PORT} in ${
+    `[Server] LegalMind Backend Foundation running on port ${PORT} in ${
       process.env.NODE_ENV || 'development'
     } mode`
   );
 });
 
-// --- Graceful Shutdown (required by Koyeb & all cloud platforms) ---
-const gracefulShutdown = (signal) => {
-  console.log(`[Server] ${signal} received. Shutting down gracefully...`);
-  server.close(() => {
-    console.log('[Server] HTTP server closed. Exiting process.');
-    process.exit(0);
-  });
-  // Force kill after 10 seconds if still hanging
-  setTimeout(() => {
-    console.error('[Server] Forced exit after 10s timeout.');
-    process.exit(1);
-  }, 10000);
-};
-
-process.on('SIGTERM', () => gracefulShutdown('SIGTERM'));
-process.on('SIGINT', () => gracefulShutdown('SIGINT'));
-
 // Handle unhandled promise rejections
 process.on('unhandledRejection', (err) => {
   console.error(`[Unhandled Rejection]: ${err.message}`);
-  if (process.env.NODE_ENV === 'production') {
-    gracefulShutdown('unhandledRejection');
-  }
 });
 
 module.exports = server;
