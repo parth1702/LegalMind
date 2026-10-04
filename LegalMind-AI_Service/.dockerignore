@@ -1,0 +1,12 @@
+venv
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.env
+.git
+data/faiss_index
+tests/
+docs/
+*.log
+scripts/
